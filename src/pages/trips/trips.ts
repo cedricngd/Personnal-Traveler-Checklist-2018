@@ -16,31 +16,44 @@ import { TripsProvider } from '../../providers/trips/trips';
   templateUrl: 'trips.html',
 })
 export class TripsPage {
-  trips:[];
+  trips:any[];
+  arrival:any;
+  departure:any;
+
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public tripsProvider:TripsProvider) {
+      this.trips= [];
+      //this.test=[];
+      //this.trips = this.tripsProvider.getRemoteTrips();
+      console.log("toooooooooooooooooooooo");
+      console.log(this.tripsProvider.getRemoteTrips());
 
-      this.trips = [];
-      this.trips = this.tripsProvider.getRemoteTrips();
-      console.log("+++++++++++++++++++++++++++++++++++++++");
-      console.log(this.trips[0].arrival_airport);
+      this.tripsProvider.getRemoteTrips().subscribe(data=>{
+            console.log(data);
+            //this.jobs=data;
+          });
 
-      for (let i= 0; i < this.trips.length;i++){
-          this .trips.push({
+      }
+      /*console.log(this.trips[0].arrival_airport);
+
+      for (let i= 0; i < 10;i++){
+          this.trips.push({
             text:'trip' + i,
             id:i
           })
-
       };
-  }
+      console.log(this.trips);
+
+  }*/
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad TripPage');
-    this.tripsProvider.getRemoteTrips();
+    //this.tripsProvider.getRemoteTrips();
   }
 
   tripSelected(trip){
     this.navCtrl.push(TripTaskPage,
-    {param1:trip.text}); // go to TripTaskPage and send variable trip.text
+    {param1:"toto"}); // go to TripTaskPage and send variable trips
   }
 
 }

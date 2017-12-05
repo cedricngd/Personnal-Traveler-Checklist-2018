@@ -9,19 +9,24 @@ import 'rxjs/add/operator/map';
 */
 @Injectable()
 export class TripsProvider {
+  trips:any[];
 
   constructor(public http: Http) {
     console.log('Hello TripsProvider Provider');
   }
 
-    getRemoteTrips() {
+    public getRemoteTrips(){
       var url = 'http://127.0.0.1:8000/trips';
-      //var response = this.http.get(url).map(res => res.json());
-      //console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"+this.http.get(url)) ;
-      this.http.get(url).map(res => res.json()).subscribe(data=>{
-      console.log(data);
-      console.log(data[0].arrival_airport);
-      return (data);
-    });
+      return this.http.get('http://127.0.0.1:8000/trips').map(res => res.json());
+
+
+      // console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa") ;
+
+
+      //this.http.get(url).map(res => res.json()).subscribe(trips=>{
+
+      //console.log(data[0].arrival_airport);
+      //return trips;
+    //});
     }
 }
