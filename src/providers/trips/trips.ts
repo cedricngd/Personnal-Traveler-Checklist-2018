@@ -12,12 +12,12 @@ export class TripsProvider {
   trips:any[];
 
   constructor(public http: Http) {
-    console.log('Hello TripsProvider Provider');
+  //  console.log('Hello TripsProvider Provider');
   }
 
     public getRemoteTrips(){
       var url = 'http://127.0.0.1:8000/trips';
-      return this.http.get('http://127.0.0.1:8000/trips').map(res => res.json());
+      return this.http.get(url).map(res => res.json());
 
 
       // console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa") ;

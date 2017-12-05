@@ -23,14 +23,15 @@ export class TripsPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public tripsProvider:TripsProvider) {
       this.trips= [];
-      //this.test=[];
-      //this.trips = this.tripsProvider.getRemoteTrips();
       console.log("toooooooooooooooooooooo");
       console.log(this.tripsProvider.getRemoteTrips());
 
       this.tripsProvider.getRemoteTrips().subscribe(data=>{
             console.log(data);
-            //this.jobs=data;
+            this.trips=data;
+            this.departure=this.trips[0].departure_airport;
+            this.arrival=this.trips[0].arrival_airport;
+            console.log(this.departure);
           });
 
       }
