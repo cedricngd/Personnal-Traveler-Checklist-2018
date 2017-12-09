@@ -14,10 +14,23 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'trip-task.html',
 })
 export class TripTaskPage {
-  tripName:any;
+  trip:any;
+  departure:any;
+  arrival:any;
+
+  tasks:any[];
+
+
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-      this.tripName = navParams.get('param1'); // get the trip name from trip.ts
+    console.log("coucou");
+      this.trip = navParams.get('trip'); // get the trip name from trip.ts
+
+      this.departure = this.trip.departure_country;
+      this.arrival = this.trip.arrival_country;
+      this.tasks=this.trip.tasks;
+
+      console.log(this.tasks);
   }
 
   ionViewDidLoad() {
