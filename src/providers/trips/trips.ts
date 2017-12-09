@@ -27,4 +27,8 @@ export class TripsProvider {
       return this.http.get(baseUrl1+tripUrl).map(res => res.json());
 
     }
+    public setRemoteTrip(){
+
+      //this.http.post(baseUrl1+tripUrl,form)
+    }
 }
