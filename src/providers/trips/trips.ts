@@ -16,17 +16,15 @@ export class TripsProvider {
   }
 
     public getRemoteTrips(){
-      var url = 'http://127.0.0.1:8000/trips';
-      return this.http.get(url).map(res => res.json());
+      var baseUrl1 = 'http://127.0.0.1:8000/';
+      var baseUrl2= 'http://192.168.43.32:8000/'
+      var baseUrl3= 'http://138.195.202.5:8000/'
 
+      var baseUrl4='http://10.1.242.16/' // ip local guest
 
-      // console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa") ;
+      var tripUrl= 'trips/'
 
+      return this.http.get(baseUrl1+tripUrl).map(res => res.json());
 
-      //this.http.get(url).map(res => res.json()).subscribe(trips=>{
-
-      //console.log(data[0].arrival_airport);
-      //return trips;
-    //});
     }
 }

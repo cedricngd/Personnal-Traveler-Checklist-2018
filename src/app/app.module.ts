@@ -8,6 +8,7 @@ import { HttpModule } from '@angular/http';
 import { TasksPage } from '../pages/tasks/tasks';
 import { ProfilePage } from '../pages/profile/profile';
 import { TripsPage } from '../pages/trips/trips';
+import { TripTaskPage } from '../pages/trip-task/trip-task';
 import { TabsPage } from '../pages/tabs/tabs';
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -20,7 +21,8 @@ import { TripsProvider } from '../providers/trips/trips';
     TasksPage,
     ProfilePage,
     TripsPage,
-    TabsPage
+    TabsPage,
+    TripTaskPage,
   ],
   imports: [
     BrowserModule,
@@ -33,7 +35,8 @@ import { TripsProvider } from '../providers/trips/trips';
     TasksPage,
     ProfilePage,
     TripsPage,
-    TabsPage
+    TabsPage,
+    TripTaskPage,
   ],
   providers: [
     StatusBar,

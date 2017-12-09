@@ -3,17 +3,24 @@
 
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
+
+  {{departure}} => {{arrival}}
 -->
 <ion-header>
 
   <ion-navbar>
-    <ion-title>tripTask</ion-title>
+    <ion-title>{{departure}} => {{arrival}}</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-  <button ion-item *ngFor="let trip  of trips" (click)="tripSelected(trip)">
-    toto
+
+
+  <ion-item *ngFor="let task  of tasks">
+    {{task.title}}
+  </ion-item>
+
+
 </ion-content>
