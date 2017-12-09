@@ -6,15 +6,22 @@
 -->
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar color="primary">
     <ion-title>My trips</ion-title>
+
+    <ion-buttons end>
+      <button ion-button icon-only (click)="addTrip()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-  <button ion-item *ngFor="let trip  of trips" (click)="tripSelected(trip)">
+  <button ion-item *ngFor="let trip  of trips" (click)="showTasks(trip)">
     {{trip.departure_country}} => {{trip.arrival_country}}
   </button>
 </ion-content>

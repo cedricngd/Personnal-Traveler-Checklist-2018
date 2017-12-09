@@ -8,8 +8,12 @@ import { HttpModule } from '@angular/http';
 import { TasksPage } from '../pages/tasks/tasks';
 import { ProfilePage } from '../pages/profile/profile';
 import { TripsPage } from '../pages/trips/trips';
-import { TripTaskPage } from '../pages/trip-task/trip-task';
 import { TabsPage } from '../pages/tabs/tabs';
+
+import { TripTaskPage } from '../pages/trip-task/trip-task';
+
+
+
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -22,7 +26,7 @@ import { TripsProvider } from '../providers/trips/trips';
     ProfilePage,
     TripsPage,
     TabsPage,
-    TripTaskPage,
+    TripTaskPage
   ],
   imports: [
     BrowserModule,
@@ -36,7 +40,7 @@ import { TripsProvider } from '../providers/trips/trips';
     ProfilePage,
     TripsPage,
     TabsPage,
-    TripTaskPage,
+    TripTaskPage
   ],
   providers: [
     StatusBar,

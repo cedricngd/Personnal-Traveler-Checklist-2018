@@ -1,15 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, ModalController } from 'ionic-angular';
 import { TripTaskPage } from '../trip-task/trip-task';
-import { TripsProvider } from '../../providers/trips/trips';
-//import { TasksPage } from '../tasks/tasks';
+import { NewTripPage } from '../new-trip/new-trip';
 
-/**
- * Generated class for the TripsPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { TripsProvider } from '../../providers/trips/trips';
 
 @IonicPage()
 @Component({
@@ -17,33 +11,20 @@ import { TripsProvider } from '../../providers/trips/trips';
   templateUrl: 'trips.html',
 })
 export class TripsPage {
-  trips:any[];
-  //arrival:any[];
-  //departure:any[];
+  public trips:any[];
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public tripsProvider:TripsProvider) {
+
+  constructor(public navCtrl: NavController,
+    public tripsProvider:TripsProvider, public newTripModal:ModalController) {
       this.trips= [];
-      //this.departure= [];
-      //this.arrival= [];
 
       this.tripsProvider.getRemoteTrips().subscribe(data=>{
             this.trips=data;
-
-
-            /*
-            for (let i=0;i<this.trips.length;i++){
-              this.departure[i]=this.trips[i].departure_country;
-              this.arrival[i]=this.trips[i].arrival_country;
-            }
-*/
           });
-
-
-
       }
-      /*console.log(this.trips[0].arrival_airport);
 
+      /*
       for (let i= 0; i < 10;i++){
           this.trips.push({
             text:'trip' + i,
@@ -51,23 +32,22 @@ export class TripsPage {
           })
       };
       console.log(this.trips);
-
   }*/
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad TripPage');
   }
 
-  tripSelected(trip){
-    console.log(trip);
-/*
-    this.navCtrl.push(TripTaskPage,{
-      tasks:"toto"
-    }); // go to TripTaskPage and send variable trips
-    */
+  showTasks(trip){
     this.navCtrl.push(TripTaskPage,{
       trip:trip
     });
+  }
+
+  addTrip(){
+    let modal= this.newTripModal.create('NewTripPage');
+    modal.present();
+    console.log("tooooooooooooooooooooooooooooo")
   }
 
 }
