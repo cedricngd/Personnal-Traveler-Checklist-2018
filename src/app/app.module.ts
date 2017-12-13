@@ -18,6 +18,7 @@ import { TripTaskPage } from '../pages/trip-task/trip-task';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { TripsProvider } from '../providers/trips/trips';
+import { TasksProvider } from '../providers/tasks/tasks';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { TripsProvider } from '../providers/trips/trips';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    TripsProvider
+    TripsProvider,
+    TasksProvider
   ]
 })
 export class AppModule {}

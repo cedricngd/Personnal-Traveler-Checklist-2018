@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>newTrip</ion-title>
+    <ion-title>Enter a new trip</ion-title>
 
     <ion-buttons end>
       <button ion-button (click)="close()">Close</button>
@@ -19,5 +19,54 @@
 
 
 <ion-content padding>
+  <ion-list>
+
+    <ion-list-header>
+        <b>Departure</b>
+      </ion-list-header>
+    <ion-item>
+      <ion-label>Departure airport</ion-label>
+        <ion-select [(ngModel)]="form.departureAirport">
+          <ion-option value="CDG">France-CDG</ion-option>
+          <ion-option value="CTU">China-CTU</ion-option>
+          <ion-option value="IATA1">IATA1</ion-option>
+          <ion-option value="IATA2">IATA2</ion-option>
+          <ion-option value="IATA3">IATA3</ion-option>
+          <ion-option value="IATA4">IATA4s</ion-option>
+        </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label> Departure date</ion-label>
+      <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="form.departureDate"></ion-datetime>
+    </ion-item>
+
+
+
+
+    <ion-list-header>
+        <b>Arrival</b>
+      </ion-list-header>
+    <ion-item>
+      <ion-label>Arrival airport</ion-label>
+        <ion-select [(ngModel)]="form.arrivalAirport">
+          <ion-option value="CDG">France-CDG</ion-option>
+          <ion-option value="CTU">China-CTU</ion-option>
+          <ion-option value="IATA1">IATA1</ion-option>
+          <ion-option value="IATA2">IATA2</ion-option>
+          <ion-option value="IATA3">IATA3</ion-option>
+          <ion-option value="IATA4">IATA4s</ion-option>
+        </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label> Arrival date</ion-label>
+      <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="form.arrivalDate"></ion-datetime>
+    </ion-item>
+
+</ion-list>
+
+<button ion-button color="primary" block (click)="addTrip()">Add this trip</button>
+
 
 </ion-content>

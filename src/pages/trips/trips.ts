@@ -18,25 +18,18 @@ export class TripsPage {
   constructor(public navCtrl: NavController,
     public tripsProvider:TripsProvider, public newTripModal:ModalController) {
       this.trips= [];
-
-      this.tripsProvider.getRemoteTrips().subscribe(data=>{
-            this.trips=data;
-          });
       }
 
-      /*
-      for (let i= 0; i < 10;i++){
-          this.trips.push({
-            text:'trip' + i,
-            id:i
-          })
-      };
-      console.log(this.trips);
-  }*/
-
   ionViewDidLoad() {
-    console.log('ionViewDidLoad TripPage');
-  }
+        this.updateTrips();
+      }
+
+  updateTrips(){
+    this.tripsProvider.getRemoteTrips().subscribe(data=>{
+          this.trips=data;
+            });
+}
+
 
   showTasks(trip){
     this.navCtrl.push(TripTaskPage,{
@@ -46,8 +39,11 @@ export class TripsPage {
 
   addTrip(){
     let modal= this.newTripModal.create('NewTripPage');
+    modal.onDidDismiss(() => {
+      this.updateTrips();
+    });
     modal.present();
-    console.log("tooooooooooooooooooooooooooooo")
+
   }
 
 }
