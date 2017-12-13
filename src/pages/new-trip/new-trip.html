@@ -26,47 +26,52 @@
       </ion-list-header>
     <ion-item>
       <ion-label>Departure airport</ion-label>
-        <ion-select [(ngModel)]="form.departureAirport">
-          <ion-option value="CDG">France-CDG</ion-option>
-          <ion-option value="CTU">China-CTU</ion-option>
-          <ion-option value="IATA1">IATA1</ion-option>
-          <ion-option value="IATA2">IATA2</ion-option>
-          <ion-option value="IATA3">IATA3</ion-option>
-          <ion-option value="IATA4">IATA4s</ion-option>
+        <ion-select [(ngModel)]="departureAirport">
+          <ion-option value="France-CDG">France-CDG</ion-option>
+          <ion-option value="China-CTU">China-CTU</ion-option>
+          <ion-option value="Italia-IATA1">Italia-IATA1</ion-option>
+          <ion-option value="Spain-IATA2">Spain-IATA2</ion-option>
         </ion-select>
     </ion-item>
 
     <ion-item>
       <ion-label> Departure date</ion-label>
-      <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="form.departureDate"></ion-datetime>
+      <ion-datetime displayFormat="YYYY-MMM-DD"  [(ngModel)]="departureDate"></ion-datetime>
     </ion-item>
 
+    <ion-item>
+        <ion-label> HH/mm/ss</ion-label>
+        <ion-datetime displayFormat="HH:mm:ss"  [(ngModel)]="departureTime"></ion-datetime>
+    </ion-item>
 
 
 
     <ion-list-header>
         <b>Arrival</b>
-      </ion-list-header>
+    </ion-list-header>
     <ion-item>
       <ion-label>Arrival airport</ion-label>
-        <ion-select [(ngModel)]="form.arrivalAirport">
-          <ion-option value="CDG">France-CDG</ion-option>
-          <ion-option value="CTU">China-CTU</ion-option>
-          <ion-option value="IATA1">IATA1</ion-option>
-          <ion-option value="IATA2">IATA2</ion-option>
-          <ion-option value="IATA3">IATA3</ion-option>
-          <ion-option value="IATA4">IATA4s</ion-option>
+        <ion-select [(ngModel)]="arrivalAirport">
+          <ion-option value="France-CDG">France-CDG</ion-option>
+          <ion-option value="China-CTU">China-CTU</ion-option>
+          <ion-option value="Italia-IATA1">Italia-IATA1</ion-option>
+          <ion-option value="Spain-IATA2">Spain-IATA2</ion-option>
         </ion-select>
     </ion-item>
 
     <ion-item>
       <ion-label> Arrival date</ion-label>
-      <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="form.arrivalDate"></ion-datetime>
+      <ion-datetime displayFormat="YYYY-MMM-DD"  [(ngModel)]="arrivalDate"></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label> HH/mm/ss</ion-label>
+      <ion-datetime displayFormat="HH:mm:ss" [(ngModel)]="arrivalTime"></ion-datetime>
     </ion-item>
 
 </ion-list>
 
-<button ion-button color="primary" block (click)="addTrip()">Add this trip</button>
+<button ion-button color="primary" block (click)="validateTrip()">Add this trip</button>
 
 
 </ion-content>

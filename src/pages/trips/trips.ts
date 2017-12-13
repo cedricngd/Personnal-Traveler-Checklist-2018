@@ -18,11 +18,10 @@ export class TripsPage {
   constructor(public navCtrl: NavController,
     public tripsProvider:TripsProvider, public newTripModal:ModalController) {
       this.trips= [];
+      this.updateTrips();
       }
 
-  ionViewDidLoad() {
-        this.updateTrips();
-      }
+
 
   updateTrips(){
     this.tripsProvider.getRemoteTrips().subscribe(data=>{
