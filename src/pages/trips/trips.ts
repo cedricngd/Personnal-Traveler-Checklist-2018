@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, ModalController } from 'ionic-angular';
 import { TripTaskPage } from '../trip-task/trip-task';
 
-
-import { TripsProvider } from '../../providers/trips/trips';
 import { AuthentificationProvider } from '../../providers/authentification/authentification';
+import { TripsProvider } from '../../providers/trips/trips';
+
 
 
 @IonicPage()
@@ -13,34 +13,27 @@ import { AuthentificationProvider } from '../../providers/authentification/authe
   templateUrl: 'trips.html',
 })
 export class TripsPage {
-  public trips:any[];
+  public trips:any;
   public token:any;
 
   constructor(public navCtrl: NavController,public tripsProvider:TripsProvider,
     public authProvider: AuthentificationProvider, public newTripModal:ModalController) {
-      this.trips= [];
-      this.getToken();
-
+      this.requestToken();
       this.updateTrips();
       }
 
 
-
+  // update the trips page with the trips that has been registered on the API
   updateTrips(){
+
     this.tripsProvider.getRemoteTrips().subscribe(data=>{
           this.trips=data;
-            });
+        });
+
   }
 
-  getToken(){
-    this.authProvider.getToken()
-      .map(returnedValue=>returnedValue.json())
-      .subscribe(
-        (data: any) => {
-          this.token=data;
-          console.log("on a le token",data);
-        }
-      );
+  requestToken(){
+    this.authProvider.requestToken();
   }
 
   showTasks(trip){
@@ -50,7 +43,7 @@ export class TripsPage {
   }
 
   addTrip(){
-    let modal= this.newTripModal.create('NewTripPage',{token:this.token});
+    let modal= this.newTripModal.create('NewTripPage');
     modal.onDidDismiss(() => {
       this.updateTrips();
     });

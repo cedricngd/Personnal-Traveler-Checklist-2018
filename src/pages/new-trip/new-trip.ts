@@ -10,7 +10,7 @@ import { TripsProvider } from '../../providers/trips/trips';
 export class NewTripPage {
   public form={"departureAirport":null,"departureTime":null,
   "arrivalAirport":null, "arrivalTime":null}; // JSON to be transfered
-  token:any;
+
 
   public departureAirport:any;
   public departureDate:any;
@@ -19,10 +19,10 @@ export class NewTripPage {
   public arrivalDate:any;
   public arrivalTime:any;
 
+
   constructor(public navCtrl: NavController, private view:ViewController, params: NavParams,
   public tripsProvider:TripsProvider,public toastCtrl:ToastController, public alertCtrl: AlertController) {
-    console.log("new trips: ",params.get('token'));
-
+    //console.log("new trips: ",params.get(''));
   }
 
 
@@ -48,7 +48,7 @@ export class NewTripPage {
         this.showAlert();
     }
     else{
-      this.tripsProvider.setRemoteTrip(this.form,this.token);
+      this.tripsProvider.setRemoteTrip(this.form);
       this.presentToast();//TODO executer si pas d'erreur d"envoi
       this.close();
 
