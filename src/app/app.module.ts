@@ -9,7 +9,6 @@ import { TasksPage } from '../pages/tasks/tasks';
 import { ProfilePage } from '../pages/profile/profile';
 import { TripsPage } from '../pages/trips/trips';
 import { TabsPage } from '../pages/tabs/tabs';
-
 import { TripTaskPage } from '../pages/trip-task/trip-task';
 
 
@@ -17,8 +16,10 @@ import { TripTaskPage } from '../pages/trip-task/trip-task';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+
 import { TripsProvider } from '../providers/trips/trips';
 import { TasksProvider } from '../providers/tasks/tasks';
+import { AuthentificationProvider } from '../providers/authentification/authentification';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { TasksProvider } from '../providers/tasks/tasks';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     TripsProvider,
-    TasksProvider
+    TasksProvider,
+    AuthentificationProvider,
   ]
 })
 export class AppModule {}

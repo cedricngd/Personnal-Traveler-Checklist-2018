@@ -17,30 +17,15 @@ export class TripsProvider {
     }
 
     //send the trip to the server
-    public setRemoteTrip(form:any){
-    this.data =  this.JSONFormat(form);
-    /*
-    this.data= {
-    traveler_id : "1",
-    departure_airport: "CDG",
-    departure_country: "France",
-    departure_date_time: "2017-12-06T18:00:00Z",
-    arrival_airport: "CHA",
-    arrival_country: "China",
-    arrival_date_time: "2017-12-07T09:30:00Z",
-    segments: []
-    }
-    */
-    console.log("on envoie:");
-    console.log(this.data);
+    public setRemoteTrip(form:any,token:any){
 
-    this.http.post(
-    this.baseUrl1+this.tripUrl,this.data)
-    .subscribe(data => {
-    this.data.response = data["_body"]; //https://stackoverflow.com/questions/39574305/property-body-does-not-exist-on-type-response
-    }, error => {
-    console.log("Oooops! "+error);
-  });
+      this.data =  this.JSONFormat(form);
+      this.http.post(this.baseUrl1+this.tripUrl,this.data)
+      .subscribe(data => {
+      this.data.response = data["_body"]; //https://stackoverflow.com/questions/39574305/property-body-does-not-exist-on-type-response
+      }, error => {
+      console.log("Trips post request failed: "+error);
+      });
 
     }
 

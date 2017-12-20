@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, ToastController, ViewController,AlertController } from 'ionic-angular';
+import { IonicPage,NavParams, NavController, ToastController, ViewController,AlertController } from 'ionic-angular';
 import { TripsProvider } from '../../providers/trips/trips';
 
 @IonicPage()
@@ -9,7 +9,8 @@ import { TripsProvider } from '../../providers/trips/trips';
 })
 export class NewTripPage {
   public form={"departureAirport":null,"departureTime":null,
-"arrivalAirport":null, "arrivalTime":null}; // JSON to be transfered
+  "arrivalAirport":null, "arrivalTime":null}; // JSON to be transfered
+  token:any;
 
   public departureAirport:any;
   public departureDate:any;
@@ -18,31 +19,43 @@ export class NewTripPage {
   public arrivalDate:any;
   public arrivalTime:any;
 
-  constructor(public navCtrl: NavController, private view:ViewController, public tripsProvider:TripsProvider,
-  public toastCtrl:ToastController, public alertCtrl: AlertController) {
-
+  constructor(public navCtrl: NavController, private view:ViewController, params: NavParams,
+  public tripsProvider:TripsProvider,public toastCtrl:ToastController, public alertCtrl: AlertController) {
+    console.log("new trips: ",params.get('token'));
 
   }
 
 
   // Validation of a new trip
-  //TODO possibilité d'aller retour
-  validateTrip(){
-    this.setTripInformations();
-
-    if (this.form.departureAirport==null||this.form.departureTime==null
+  validateTrip(){  //TODO possibilité d'aller retour
+    this.setTripInformationsFormat();
+/*
+    for(let i=0;i<4;i++){
+      if (this.form[i]==null){
+        this.showAlert();
+        break;
+      }
+      else{
+        this.tripsProvider.setRemoteTrip(this.form,this.token);
+        this.presentToast();//TODO executer si pas d'erreur d"envoi
+        this.close();
+      }
+      console.log("tototo");
+    }
+*/
+    if (this.form.departureAirport==null||this.form.departureTime==null //TODO rendre plus "joli"
       ||this.form.arrivalAirport==null||this.form.arrivalTime==null){
         this.showAlert();
     }
     else{
-      this.tripsProvider.setRemoteTrip(this.form);
-      this.presentToast();
+      this.tripsProvider.setRemoteTrip(this.form,this.token);
+      this.presentToast();//TODO executer si pas d'erreur d"envoi
       this.close();
 
     }
   }
 
-  setTripInformations(){ //TODO deplacer dans tripsProvider.JSONFormat() pour plus de clareté
+  setTripInformationsFormat(){ //TODO deplacer dans tripsProvider.JSONFormat() pour plus de clareté
     this.form.departureAirport= this.departureAirport;
     this.form.departureTime= this.departureDate+"T"+this.departureTime+"Z"; //ISO8601 time format
     this.form.arrivalAirport= this.arrivalAirport;
