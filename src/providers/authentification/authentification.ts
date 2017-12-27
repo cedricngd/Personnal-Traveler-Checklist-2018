@@ -24,9 +24,6 @@ export class AuthentificationProvider {
       );
   }
 
-  public getToken(){
-    return this.token;
-  }
 
   public createHeader(){
     /*
