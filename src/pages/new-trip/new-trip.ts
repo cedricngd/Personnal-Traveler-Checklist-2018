@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage,NavParams, NavController, ToastController, ViewController,AlertController } from 'ionic-angular';
+import { IonicPage,NavParams, NavController, ToastController, ViewController
+  ,AlertController } from 'ionic-angular';
 import { TripsProvider } from '../../providers/trips/trips';
 
 @IonicPage()

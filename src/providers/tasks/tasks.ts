@@ -1,24 +1,23 @@
-import { Http } from '@angular/http';
+import { HttpClient} from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { AuthentificationProvider } from '../../providers/authentification/authentification';
 
-/*
-  Generated class for the TasksProvider provider.
 
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
 @Injectable()
 export class TasksProvider {
-  private baseUrl1 = 'http://127.0.0.1:8000/';
-  private tripUrl= 'trips/';
+  private baseUrl = 'http://127.0.0.1:8000/trips/';
 
-  constructor(public http: Http) {
-    console.log('Hello TasksProvider Provider');
+  constructor(public http:HttpClient,  public authProvider: AuthentificationProvider) {
+  }
+
+  public generateRemoteTasks(id){
+    return this.http.get(this.baseUrl+id+'/generate_tasks/',{headers:this.authProvider.createHeader()});
+
+
   }
 
 
-
-  public getRemoteTasks(){
-    return this.http.get(this.baseUrl1+this.tripUrl).map(res => res.json());
+  public getRemoteTasks(id){
+    return this.http.get(this.baseUrl+id+'/tasks/',{headers:this.authProvider.createHeader()});
   }
 }

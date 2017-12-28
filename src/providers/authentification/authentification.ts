@@ -8,9 +8,9 @@ export class AuthentificationProvider {
   private url = 'http://127.0.0.1:8000/get_auth_token/';
   private credentials={username:"cedric",password:"azertyuiop"}; //TODO donner la possibilité de les changer
   private token=null;
+  public tokenReceived=false;
 
   constructor(public http: HttpClient) {
-    console.log('Hello AuthentificationProvider Provider');
   }
 
   public requestToken(){
@@ -19,10 +19,11 @@ export class AuthentificationProvider {
       .subscribe(
         (data: any) => {
           this.token=data;
-          console.log("post terminé: on a le token ",data);
         }
       );
+
   }
+
 
 
   public createHeader(){
@@ -36,8 +37,6 @@ export class AuthentificationProvider {
     let headers = new HttpHeaders()
     .set('Authorization','Token '+ this.token.token)
     .set("Content-type", "application/json");
-
-    console.log("les headers que j'envoie:",headers );
     return headers;
 
   }

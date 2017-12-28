@@ -1,6 +1,5 @@
 import { HttpClient} from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import 'rxjs/add/operator/map';
 import { AuthentificationProvider } from '../../providers/authentification/authentification';
 
 @Injectable()
@@ -13,22 +12,21 @@ export class TripsProvider {
   constructor(public http:HttpClient,  public authProvider: AuthentificationProvider) {
   }
     // retreive the trips from the server
-    public getRemoteTrips(){
-      return this.http.get(this.baseUrl1+this.tripUrl);
+  public getRemoteTrips(){
+      return this.http.get(this.baseUrl1+this.tripUrl,{headers:this.authProvider.createHeader()});
     }
 
     //send the trip to the server
-    public setRemoteTrip(form:any){
+  public setRemoteTrip(form:any){
 
       this.data =  this.JSONFormat(form);
-      console.log("j'envoie ca: ", this.data)
       this.http.post(this.baseUrl1+this.tripUrl,this.data,{headers:this.authProvider.createHeader()})
       .subscribe(data => {
       this.data.response = data["_body"]; //https://stackoverflow.com/questions/39574305/property-body-does-not-exist-on-type-response
-      console.log("post du setremotetrip: ",data["_body"]);
+
       }, error => {
       console.log("Trips post request failed: ",error);
-    });
+      })
 
     }
 
@@ -42,7 +40,6 @@ export class TripsProvider {
       let ArrivalCountry_IATA=form.arrivalAirport.split("-");
 
       return {
-      traveler_id : "1",
       departure_airport:DepartureCountry_IATA[1],
       departure_country:DepartureCountry_IATA[0],
       departure_date_time: departureTime,

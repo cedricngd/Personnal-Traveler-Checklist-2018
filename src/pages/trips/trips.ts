@@ -18,7 +18,6 @@ export class TripsPage {
 
   constructor(public navCtrl: NavController,public tripsProvider:TripsProvider,
     public authProvider: AuthentificationProvider, public newTripModal:ModalController) {
-      this.requestToken();
       this.updateTrips();
       }
 
@@ -32,9 +31,6 @@ export class TripsPage {
 
   }
 
-  requestToken(){
-    this.authProvider.requestToken();
-  }
 
   showTasks(trip){
     this.navCtrl.push(TripTaskPage,{

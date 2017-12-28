@@ -11,6 +11,7 @@ import { ProfilePage } from '../pages/profile/profile';
 import { TripsPage } from '../pages/trips/trips';
 import { TabsPage } from '../pages/tabs/tabs';
 import { TripTaskPage } from '../pages/trip-task/trip-task';
+import { LoginPage } from '../pages/login/login';
 
 
 
@@ -29,7 +30,8 @@ import { AuthentificationProvider } from '../providers/authentification/authenti
     ProfilePage,
     TripsPage,
     TabsPage,
-    TripTaskPage
+    TripTaskPage,
+    LoginPage
   ],
   imports: [
     BrowserModule,
@@ -43,7 +45,8 @@ import { AuthentificationProvider } from '../providers/authentification/authenti
     ProfilePage,
     TripsPage,
     TabsPage,
-    TripTaskPage
+    TripTaskPage,
+    LoginPage
   ],
   providers: [
     StatusBar,
