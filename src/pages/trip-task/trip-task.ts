@@ -39,6 +39,7 @@ export class TripTaskPage {
   //regenerate automatic tasks if they have been deleted by the user but he wants them back
   generateTasks(id){
     this.tasksProvider.generateRemoteTasks(id).subscribe( data=>{
+      console.log(data);
     });
   }
 
@@ -50,6 +51,9 @@ export class TripTaskPage {
      buttons: ['OK']
     });
     alert.present();
+ }
+ deleteTask(){ //TODO
+   console.log("not implemented yet")
  }
 
 

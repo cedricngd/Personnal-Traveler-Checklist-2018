@@ -14,11 +14,16 @@
 </ion-header>
 
 
-<ion-content padding>
-<ion-refresher (ionRefresh)="refreshTasks($event)">
+<ion-content>
+	<p ion-text color="primary" text-center >
+		<ion-icon end name="arrow-back"></ion-icon>
+			Swipe to remove
+		<ion-icon end name="arrow-back"></ion-icon>
+	</p>
+
+<ion-refresher (ionRefresh)="refreshTrips($event)">
 	<ion-refresher-content
 		pullingIcon="arrow-dropdown"
-		pullingText="Pull to refresh"
 		refreshingText="Refreshing...">
 	</ion-refresher-content>
 </ion-refresher>
@@ -38,9 +43,13 @@
 		</ion-item-sliding>
 	</ion-list>
 
-
-
-
-
-
 </ion-content>
+
+
+<ion-footer no-border>
+    <p ion-text color="primary" text-center>
+			<ion-icon end name="arrow-down"></ion-icon>
+			Pull to refresh
+			<ion-icon end name="arrow-down"></ion-icon>
+		</p>
+</ion-footer>

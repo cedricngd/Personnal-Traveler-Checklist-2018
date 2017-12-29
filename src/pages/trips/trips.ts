@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, ModalController,ToastController, } from 'ionic-angular';
 import { TripTaskPage } from '../trip-task/trip-task';
-
-import { AuthentificationProvider } from '../../providers/authentification/authentification';
 import { TripsProvider } from '../../providers/trips/trips';
 
 
@@ -17,8 +15,7 @@ export class TripsPage {
   public token:any;
 
   constructor(public navCtrl: NavController,public tripsProvider:TripsProvider,
-    public authProvider: AuthentificationProvider, public newTripModal:ModalController,
-  public toastCtrl:ToastController) {
+    public newTripModal:ModalController, public toastCtrl:ToastController) {
       this.updateTrips();
       }
 
@@ -56,9 +53,10 @@ export class TripsPage {
   }
 
 
-  deleteTrip(trip){
+  deleteTrip(trip:any){
     this.tripsProvider.deleteRemoteTrip(trip).subscribe(
       data=>{
+
       this.updateTrips();
       this.presentToast();
       },
@@ -68,7 +66,7 @@ export class TripsPage {
       );
   }
 
-  refreshTasks(refresher) {
+  refreshTrips(refresher) {
      this.updateTrips();
 
      setTimeout(() => {
