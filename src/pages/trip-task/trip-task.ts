@@ -2,12 +2,6 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { TasksProvider } from '../../providers/tasks/tasks';
 
-/**
- * Generated class for the TripTaskPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -46,15 +40,14 @@ export class TripTaskPage {
 
   getTasksForThisTrip(id){
   this.tasksProvider.getRemoteTasks(id).subscribe(data=>{
-          this.tasks=data;console.log(data);
-          console.log("getTask...");
+          this.tasks=data;
         });
   }
 
   //regenerate automatic tasks if they have been deleted by the user but he wants them back
   generateTasks(id){
     this.tasksProvider.generateRemoteTasks(id).subscribe( data=>{
-      console.log("generating tasks");
+      console.log("tasks generated.");
     });
   }
 

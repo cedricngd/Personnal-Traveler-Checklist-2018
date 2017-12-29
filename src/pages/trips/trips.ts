@@ -46,5 +46,8 @@ export class TripsPage {
     modal.present();
 
   }
+  deleteTrip(){
+    
+  }
 
 }

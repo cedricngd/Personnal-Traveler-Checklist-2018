@@ -23,7 +23,6 @@ export class TripsProvider {
       this.http.post(this.baseUrl1+this.tripUrl,this.data,{headers:this.authProvider.createHeader()})
       .subscribe(data => {
       this.data.response = data["_body"]; //https://stackoverflow.com/questions/39574305/property-body-does-not-exist-on-type-response
-
       }, error => {
       console.log("Trips post request failed: ",error);
       })
