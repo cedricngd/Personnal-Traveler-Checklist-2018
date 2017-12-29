@@ -24,11 +24,9 @@ export class TripsPage {
 
   // update the trips page with the trips that has been registered on the API
   updateTrips(){
-
     this.tripsProvider.getRemoteTrips().subscribe(data=>{
           this.trips=data;
         });
-
   }
 
 
@@ -46,8 +44,14 @@ export class TripsPage {
     modal.present();
 
   }
-  deleteTrip(){
-    
+
+  deleteTrip(trip){
+    this.tripsProvider.deleteRemoteTrip(trip).subscribe(data=>{
+      this.updateTrips();
+    });
+
+
+
   }
 
 }

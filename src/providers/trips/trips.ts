@@ -29,6 +29,13 @@ export class TripsProvider {
 
     }
 
+    public deleteRemoteTrip(trip:any){
+      let ret=this.http.delete(this.baseUrl1+"trips/"+trip.id+"/",{headers:this.authProvider.createHeader()})
+      console.log(ret);
+      return ret;
+    }
+
+
     // Format the data to be accepted by the server
     private JSONFormat(form:any){
 

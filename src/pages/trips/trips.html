@@ -1,35 +1,35 @@
 <ion-header>
 
-  <ion-navbar color="primary">
-    <ion-title>My trips</ion-title>
+	<ion-navbar color="primary">
+		<ion-title>My trips</ion-title>
 
-    <ion-buttons end>
-      <button ion-button icon-only (click)="addTrip()">
-        <ion-icon name="add"></ion-icon>
-      </button>
+		<ion-buttons end>
+			<button ion-button icon-only (click)="addTrip()">
+				<ion-icon name="add"></ion-icon>
+			</button>
 
-    </ion-buttons>
-  </ion-navbar>
+		</ion-buttons>
+	</ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
 
-  <ion-list>
-    <ion-item-sliding #slidingItem *ngFor="let trip  of trips">
-      <ion-item>
-        <button ion-item  no-lines (click)="showTasks(trip)">
-          {{trip.departure_country}} => {{trip.arrival_country}}
-        </button>
-      </ion-item>
-      <ion-item-options>
-        <button ion-button large color="danger" (click)="deleteTrip(slidingItem)">
-          <ion-icon name="trash"></ion-icon>
-        </button>
-      </ion-item-options>
-    </ion-item-sliding>
-  </ion-list>
+	<ion-list>
+		<ion-item-sliding #slidingItem *ngFor="let trip  of trips">
+			<ion-item>
+				<button ion-item  no-lines (click)="showTasks(trip)">
+					{{trip.departure_country}} => {{trip.arrival_country}}
+				</button>
+			</ion-item>
+			<ion-item-options>
+				<button ion-button large color="danger" (click)="deleteTrip(trip)">
+					<ion-icon name="trash"></ion-icon>
+				</button>
+			</ion-item-options>
+		</ion-item-sliding>
+	</ion-list>
 
 
 
