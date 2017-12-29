@@ -12,6 +12,7 @@ import { TripsPage } from '../pages/trips/trips';
 import { TabsPage } from '../pages/tabs/tabs';
 import { TripTaskPage } from '../pages/trip-task/trip-task';
 import { LoginPage } from '../pages/login/login';
+import { TaskInfoPage } from '../pages/task-info/task-info';
 
 
 
@@ -31,7 +32,8 @@ import { AuthentificationProvider } from '../providers/authentification/authenti
     TripsPage,
     TabsPage,
     TripTaskPage,
-    LoginPage
+    LoginPage,
+
   ],
   imports: [
     BrowserModule,
@@ -46,7 +48,7 @@ import { AuthentificationProvider } from '../providers/authentification/authenti
     TripsPage,
     TabsPage,
     TripTaskPage,
-    LoginPage
+    LoginPage,
   ],
   providers: [
     StatusBar,

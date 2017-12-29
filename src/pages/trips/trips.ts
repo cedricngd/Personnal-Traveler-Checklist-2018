@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, ModalController,ToastController, } from 'ionic-angular';
 import { TripTaskPage } from '../trip-task/trip-task';
 
 import { AuthentificationProvider } from '../../providers/authentification/authentification';
@@ -17,7 +17,8 @@ export class TripsPage {
   public token:any;
 
   constructor(public navCtrl: NavController,public tripsProvider:TripsProvider,
-    public authProvider: AuthentificationProvider, public newTripModal:ModalController) {
+    public authProvider: AuthentificationProvider, public newTripModal:ModalController,
+  public toastCtrl:ToastController) {
       this.updateTrips();
       }
 
@@ -45,13 +46,34 @@ export class TripsPage {
 
   }
 
-  deleteTrip(trip){
-    this.tripsProvider.deleteRemoteTrip(trip).subscribe(data=>{
-      this.updateTrips();
+  //Message: the trip has been succesfully removed
+  presentToast() {
+    let toast = this.toastCtrl.create({
+      message: 'This trip was successfully removed ! ',
+      duration: 2000
     });
-
-
-
+    toast.present();
   }
+
+
+  deleteTrip(trip){
+    this.tripsProvider.deleteRemoteTrip(trip).subscribe(
+      data=>{
+      this.updateTrips();
+      this.presentToast();
+      },
+      error => {
+      console.log("Removing trip failed: ",error);
+      }
+      );
+  }
+
+  refreshTasks(refresher) {
+     this.updateTrips();
+
+     setTimeout(() => {
+       refresher.complete();
+     }, 1000);
+   }
 
 }

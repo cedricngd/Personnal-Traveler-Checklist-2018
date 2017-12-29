@@ -15,11 +15,18 @@
 
 
 <ion-content padding>
+<ion-refresher (ionRefresh)="refreshTasks($event)">
+	<ion-refresher-content
+		pullingIcon="arrow-dropdown"
+		pullingText="Pull to refresh"
+		refreshingText="Refreshing...">
+	</ion-refresher-content>
+</ion-refresher>
 
 	<ion-list>
 		<ion-item-sliding #slidingItem *ngFor="let trip  of trips">
 			<ion-item>
-				<button ion-item  no-lines (click)="showTasks(trip)">
+				<button ion-item no-lines (click)="showTasks(trip)" >
 					{{trip.departure_country}} => {{trip.arrival_country}}
 				</button>
 			</ion-item>

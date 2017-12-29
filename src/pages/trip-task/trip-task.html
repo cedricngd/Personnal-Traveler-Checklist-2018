@@ -18,9 +18,21 @@
 <ion-content padding>
 
 
-  <ion-item *ngFor="let task  of tasks">
-    {{task.title}}
-  </ion-item>
+
+  <ion-list>
+    <ion-item-sliding #slidingItem *ngFor="let task  of tasks">
+      <ion-item>
+        <button ion-item  no-lines (click)="showTaskInfo(task)">
+          {{task.title}}
+        </button>
+      </ion-item>
+      <ion-item-options>
+        <button ion-button large color="danger" (click)="deleteTrip(trip)">
+          <ion-icon name="trash"></ion-icon>
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
 
 
 </ion-content>
