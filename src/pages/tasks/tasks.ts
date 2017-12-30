@@ -9,9 +9,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class TasksPage {
 trip:any[];
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    console.log("coucou");
-      this.trip = navParams.get('tasks'); // get the trip name from trip.ts
-      console.log(this.trip);
+      //this.trip = navParams.get('tasks'); // get the trip name from trip.ts
+      //console.log(this.trip);
 
   }
 
