@@ -14,7 +14,6 @@ export class AuthentificationProvider {
   }
 
   public requestToken(){
-
     this.http.post( this.url, this.credentials)
       .subscribe(
         (data: any) => {

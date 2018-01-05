@@ -29,7 +29,6 @@ export class NewTripPage {
 
   // Validation of a new trip
   validateTrip(){  //TODO possibilité d'aller retour
-    let emptyField=false;
     /*
     this.data.push(this.departureAirport,this.departureTime,this.departureDate,
               this.arrivalAirport,this.arrivalTime,this.arrivalDate);

@@ -20,4 +20,9 @@ export class TasksProvider {
   public getRemoteTasks(id){
     return this.http.get(this.baseUrl+id+'/tasks/',{headers:this.authProvider.createHeader()});
   }
+
+  // set a task to "completed" (task.completed =true) or "not completed yet" (task.completed =false)
+  public updateTask(taskUrl:any,bool:boolean){
+    return this.http.patch(taskUrl,{completed:bool},{headers:this.authProvider.createHeader()});
+  }
 }

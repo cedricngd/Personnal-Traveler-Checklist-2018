@@ -1,38 +1,93 @@
 <!--
-  Generated template for the TripTaskPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
-
-  {{departure}} => {{arrival}}
+<ion-navbar color="primary" no-border-bottom>
 -->
 <ion-header>
 
   <ion-navbar color="primary">
     <ion-title>{{departure}} => {{arrival}}</ion-title>
   </ion-navbar>
+  <ion-toolbar>
+    <ion-segment [(ngModel)]="tasksSelection" >
+      <ion-segment-button value="todo">
+        <ion-icon name="md-square-outline" color="danger"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="done">
+        <ion-icon name="md-checkbox-outline" color="secondary"></ion-icon>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
 
 </ion-header>
 
-
 <ion-content padding>
 
+  <div [ngSwitch]="tasksSelection">
+      <ion-list *ngSwitchCase="'todo'">
+
+        <ion-item-sliding *ngFor="let task  of toDoTasks">
+          <ion-item>
+            <button ion-item  no-lines (click)="showTaskInfo(task)">
+              {{task.title}}
+            </button>
+          </ion-item>
+          <ion-item-options>
+            <button ion-button large color="secondary" (click)="taskDone(task)">
+              <ion-icon name="checkmark"></ion-icon>
+            </button>
+            <button ion-button large color="danger" (click)="deleteTask(task)">
+              <ion-icon name="trash"></ion-icon>
+            </button>
+          </ion-item-options>
+        </ion-item-sliding>
+      </ion-list>
+
+      <ion-list *ngSwitchCase="'done'">
+
+        <ion-item-sliding *ngFor="let task  of tasksDone">
+          <ion-item>
+            <button ion-item  no-lines (click)="showTaskInfo(task)">
+              {{task.title}}
+            </button>
+          </ion-item>
+          <ion-item-options>
+            <button ion-button large color="secondary" (click)="taskToDo(task)">
+              <ion-icon name="square-outline"></ion-icon>
+            </button>
+            <button ion-button large color="danger" (click)="deleteTask(task)">
+              <ion-icon name="trash"></ion-icon>
+            </button>
+          </ion-item-options>
+        </ion-item-sliding>
+      </ion-list>
+
+  </div>
 
 
+
+
+<!--
   <ion-list>
-    <ion-item-sliding #slidingItem *ngFor="let task  of tasks">
+    <ion-item-sliding *ngFor="let task  of toDoTasks">
       <ion-item>
         <button ion-item  no-lines (click)="showTaskInfo(task)">
           {{task.title}}
         </button>
       </ion-item>
       <ion-item-options>
-        <button ion-button large color="danger" (click)="deleteTask(trip)">
+        <button ion-button large color="secondary" (click)="taskDone(task)">
+          <ion-icon name="checkmark"></ion-icon>
+        </button>
+        <button ion-button large color="danger" (click)="deleteTask(task)">
           <ion-icon name="trash"></ion-icon>
         </button>
       </ion-item-options>
     </ion-item-sliding>
-  </ion-list>
 
+
+
+
+
+  </ion-list>
+-->
 
 </ion-content>
