@@ -12,8 +12,6 @@ export class TasksProvider {
 
   public generateRemoteTasks(id){
     return this.http.get(this.baseUrl+id+'/generate_tasks/',{headers:this.authProvider.createHeader()});
-
-
   }
 
 
@@ -21,8 +19,18 @@ export class TasksProvider {
     return this.http.get(this.baseUrl+id+'/tasks/',{headers:this.authProvider.createHeader()});
   }
 
-  // set a task to "completed" (task.completed =true) or "not completed yet" (task.completed =false)
-  public updateTask(taskUrl:any,bool:boolean){
-    return this.http.patch(taskUrl,{completed:bool},{headers:this.authProvider.createHeader()});
+  //change a field in the Task JSON
+  public updateTask(taskUrl:any,completed:boolean,isVisible:boolean){
+
+    if(isVisible==null){// set a task to "completed" (task.completed =true) or "not completed yet" (task.completed =false)
+      return this.http.patch(taskUrl,{completed:completed},{headers:this.authProvider.createHeader()});
+    }
+    else if (completed == null){ // set if the task is displaying or not
+      return this.http.patch(taskUrl,{isVisible:isVisible},{headers:this.authProvider.createHeader()});
+    }
+    else{
+      console.error("Error update field in tasks.updateTask()");
+    }
   }
+
 }

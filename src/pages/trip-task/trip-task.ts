@@ -8,20 +8,21 @@ import { TasksProvider } from '../../providers/tasks/tasks';
   templateUrl: 'trip-task.html',
 })
 export class TripTaskPage {
-  trip:any;       // json of the selected trip
-  id:any;         // id of the selected trip
-  departure:any;
-  arrival:any;
+  public trip:any;       // json of the selected trip
+  public id:any;         // id of the selected trip
+  public departure:any;
+  public arrival:any;
 
 
-  toDoTasks:any[];  // contains the remaining tasks
-  tasksDone:any[];  // contains the already executed tasks
-  tasksSelection:any; // to choose between displaying executed tasks and the tasks to be done
+  public toDoTasks:any[];     // contains the remaining tasks
+  public tasksDone:any[];     // contains the already executed tasks
+  public deletedTasks:any[];  // contains the unwanted tasks
+  public tasksSelection:any;  // to choose between displaying executed tasks and the tasks to be done
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public tasksProvider:TasksProvider,public alertCtrl: AlertController) {
-      console.log("constructor trip task");
+
       this.tasksSelection="todo"; // by default, display tasks to be done
       this.tasksDone=[];
       this.toDoTasks=[];
@@ -29,10 +30,7 @@ export class TripTaskPage {
       this.departure = this.trip.departure_country;
       this.arrival = this.trip.arrival_country;
       this.id=this.trip.id;
-
       this.sortTasks(this.id);
-
-
     }
 
     ionViewDidLoad() {
@@ -41,38 +39,35 @@ export class TripTaskPage {
     sortTasks(id){
       this.tasksDone=[];
       this.toDoTasks=[];
+      this.deletedTasks=[];
       this.tasksProvider.getRemoteTasks(id).subscribe((allTasks:any[])=>{
-            for(let i =0;i<allTasks.length;i++){
-              if(allTasks[i].completed==true){
-                // add this task to tasksDone
-                this.tasksDone.push(allTasks[i]);
-              }
-
-              else{
-                this.toDoTasks.push(allTasks[i]);
-                //this.tasksDone.splice(this.tasksDone.indexOf(allTasks[i]),1);
-              }
-
-            }
-          });
-
-
+        for(let i =0;i<allTasks.length;i++){
+          if(allTasks[i].completed==true && allTasks[i].isVisible==true){
+            // add this task to the checked tasks
+            this.tasksDone.push(allTasks[i]);
+          }
+          else if (allTasks[i].completed==false && allTasks[i].isVisible==true){
+            // add this task to the tasks to be done
+            this.toDoTasks.push(allTasks[i]);
+          }
+          else{
+            this.deletedTasks.push(allTasks[i]);
+          }
+        }
+        /*
+        console.log("task Done: ",this.tasksDone);
+        console.log("toDoTasks: ",this.toDoTasks);
+        console.log("deletedTask: ",this.deletedTasks);
+        */
+      });
     }
 
-    updateTask(task:any,bool:boolean){
-        let ret=this.tasksProvider.updateTask(task.url,bool).subscribe(data=>{
+    updateTask(task:any,completed:boolean,isVisible:boolean){
+      this.tasksProvider.updateTask(task.url,completed,isVisible).subscribe(data=>{
           this.sortTasks(task.trip);
         });
     }
 
-  /*
-    //regenerate automatic tasks if they have been deleted by the user but he wants them back
-    generateTasks(id){
-      this.tasksProvider.generateRemoteTasks(id).subscribe( data=>{
-        console.log(data);
-      });
-    }
-  */
 
     showTaskInfo(task:any){
       let alert = this.alertCtrl.create({
@@ -83,17 +78,25 @@ export class TripTaskPage {
       alert.present();
     }
 
-   deleteTask(task:any){ //TODO
+    deleteTask(task:any){
+      this.updateTask(task,null,false);
+    }
 
-
+    restoreTask(task:any){
+      this.updateTask(task,null,true);
     }
 
     taskDone(task:any ){
-      this.updateTask(task,true);
+      this.updateTask(task,true,null);
     }
 
     taskToDo(task:any){
-      this.updateTask(task,false);
+      this.updateTask(task,false,null);
+    }
+
+    //add a new task for this trip
+    addTask(){
+    console.log("add new task");
     }
 
   }

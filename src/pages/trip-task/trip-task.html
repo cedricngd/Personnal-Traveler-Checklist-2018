@@ -4,15 +4,18 @@
 <ion-header>
 
   <ion-navbar color="primary">
-    <ion-title>{{departure}} => {{arrival}}</ion-title>
+    <ion-title>Tasks for {{departure}} => {{arrival}}</ion-title>
   </ion-navbar>
   <ion-toolbar>
     <ion-segment [(ngModel)]="tasksSelection" >
       <ion-segment-button value="todo">
-        <ion-icon name="md-square-outline" color="danger"></ion-icon>
+        <ion-icon name="md-square-outline" color="orange"></ion-icon>
       </ion-segment-button>
       <ion-segment-button value="done">
         <ion-icon name="md-checkbox-outline" color="secondary"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="trash">
+        <ion-icon name="trash" color="light"></ion-icon>
       </ion-segment-button>
     </ion-segment>
   </ion-toolbar>
@@ -23,7 +26,7 @@
 
   <div [ngSwitch]="tasksSelection">
       <ion-list *ngSwitchCase="'todo'">
-
+        <h5  ion-text color="orange"> Tasks to be done:</h5>
         <ion-item-sliding *ngFor="let task  of toDoTasks">
           <ion-item>
             <button ion-item  no-lines (click)="showTaskInfo(task)">
@@ -34,7 +37,7 @@
             <button ion-button large color="secondary" (click)="taskDone(task)">
               <ion-icon name="checkmark"></ion-icon>
             </button>
-            <button ion-button large color="danger" (click)="deleteTask(task)">
+            <button ion-button large color="light" (click)="deleteTask(task)">
               <ion-icon name="trash"></ion-icon>
             </button>
           </ion-item-options>
@@ -42,7 +45,7 @@
       </ion-list>
 
       <ion-list *ngSwitchCase="'done'">
-
+        <h5  ion-text color="secondary"> Checked tasks:</h5>
         <ion-item-sliding *ngFor="let task  of tasksDone">
           <ion-item>
             <button ion-item  no-lines (click)="showTaskInfo(task)">
@@ -50,44 +53,37 @@
             </button>
           </ion-item>
           <ion-item-options>
-            <button ion-button large color="secondary" (click)="taskToDo(task)">
+            <button ion-button large color="danger" (click)="taskToDo(task)">
               <ion-icon name="square-outline"></ion-icon>
             </button>
-            <button ion-button large color="danger" (click)="deleteTask(task)">
+            <button ion-button large color="light" (click)="deleteTask(task)">
               <ion-icon name="trash"></ion-icon>
             </button>
           </ion-item-options>
         </ion-item-sliding>
       </ion-list>
 
+      <ion-list *ngSwitchCase="'trash'">
+        <h5  ion-text color="light"> Removed tasks:</h5>
+        <ion-item-sliding *ngFor="let task of deletedTasks">
+          <ion-item>
+            <button ion-item  no-lines (click)="showTaskInfo(task)">
+              {{task.title}}
+            </button>
+          </ion-item>
+          <ion-item-options>
+            <button ion-button large color="secondary" (click)="restoreTask (task)">
+              <ion-icon name="undo"></ion-icon>
+            </button>
+          </ion-item-options>
+        </ion-item-sliding>
+      </ion-list>
   </div>
 
+  <ion-fab right bottom>
+      <button ion-fab color="primary" (click)="addTask()">
+        <ion-icon name="add"></ion-icon>
+      </button>
 
-
-
-<!--
-  <ion-list>
-    <ion-item-sliding *ngFor="let task  of toDoTasks">
-      <ion-item>
-        <button ion-item  no-lines (click)="showTaskInfo(task)">
-          {{task.title}}
-        </button>
-      </ion-item>
-      <ion-item-options>
-        <button ion-button large color="secondary" (click)="taskDone(task)">
-          <ion-icon name="checkmark"></ion-icon>
-        </button>
-        <button ion-button large color="danger" (click)="deleteTask(task)">
-          <ion-icon name="trash"></ion-icon>
-        </button>
-      </ion-item-options>
-    </ion-item-sliding>
-
-
-
-
-
-  </ion-list>
--->
-
+    </ion-fab>
 </ion-content>
