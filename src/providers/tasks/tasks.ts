@@ -21,16 +21,19 @@ export class TasksProvider {
 
   //change a field in the Task JSON
   public updateTask(taskUrl:any,completed:boolean,isVisible:boolean){
-
     if(isVisible==null){// set a task to "completed" (task.completed =true) or "not completed yet" (task.completed =false)
-      return this.http.patch(taskUrl,{completed:completed},{headers:this.authProvider.createHeader()});
+    return this.http.patch(taskUrl,{completed:completed},{headers:this.authProvider.createHeader()});
     }
     else if (completed == null){ // set if the task is displaying or not
       return this.http.patch(taskUrl,{isVisible:isVisible},{headers:this.authProvider.createHeader()});
     }
     else{
-      console.error("Error update field in tasks.updateTask()");
+      console.error("Error in tasks.updateTask()");
     }
+  }
+
+  public addTasks(task:any){
+    return this.http.post('http://127.0.0.1:8000/tasks/',task,{headers:this.authProvider.createHeader()});
   }
 
 }

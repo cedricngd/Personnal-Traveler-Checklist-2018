@@ -24,9 +24,8 @@ export class TripTaskPage {
     public tasksProvider:TasksProvider,public alertCtrl: AlertController) {
 
       this.tasksSelection="todo"; // by default, display tasks to be done
-      this.tasksDone=[];
-      this.toDoTasks=[];
       this.trip = navParams.get('trip'); // get the trip informations from trip.ts
+      console.log("trip",this.trip);
       this.departure = this.trip.departure_country;
       this.arrival = this.trip.arrival_country;
       this.id=this.trip.id;
@@ -51,9 +50,11 @@ export class TripTaskPage {
             this.toDoTasks.push(allTasks[i]);
           }
           else{
+            // add this task to the deleted tasks
             this.deletedTasks.push(allTasks[i]);
           }
         }
+          console.log("toDoTasks: ",this.toDoTasks);
         /*
         console.log("task Done: ",this.tasksDone);
         console.log("toDoTasks: ",this.toDoTasks);
@@ -95,8 +96,22 @@ export class TripTaskPage {
     }
 
     //add a new task for this trip
-    addTask(){
-    console.log("add new task");
+    public addTask(){
+
+      let task={
+        "trip": "http://127.0.0.1:8000/trips/"+this.id+"/",
+        "title":	"Test",
+        "deadline":	null,
+        "completed":	true,
+        "comments": "ceci est un test",
+        "auto":	true,
+        "isVisible":	true,
+      }
+
+      this.tasksProvider.addTasks(task).subscribe(data=>{
+          console.log("add new task", data);
+        });
+
     }
 
   }

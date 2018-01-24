@@ -21,6 +21,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { TripsProvider } from '../providers/trips/trips';
 import { TasksProvider } from '../providers/tasks/tasks';
 import { AuthentificationProvider } from '../providers/authentification/authentification';
+import { ProfileProvider } from '../providers/profile/profile';
 
 @NgModule({
   declarations: [
@@ -52,10 +53,10 @@ import { AuthentificationProvider } from '../providers/authentification/authenti
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-
     TasksProvider,
     AuthentificationProvider,
     TripsProvider,
+    ProfileProvider,
   ]
 })
 export class AppModule {}

@@ -29,21 +29,12 @@ export class NewTripPage {
 
   // Validation of a new trip
   validateTrip(){  //TODO possibilité d'aller retour
-    /*
-    this.data.push(this.departureAirport,this.departureTime,this.departureDate,
-              this.arrivalAirport,this.arrivalTime,this.arrivalDate);
-    */
-
-
-
     this.form.arrivalAirport=this.arrivalAirport;
     this.form.arrivalDate=this.arrivalDate;
     this.form.arrivalTime=this.arrivalTime;
     this.form.departureAirport=this.departureAirport;
     this.form.departureDate=this.departureDate;
     this.form.departureTime=this.departureTime;
-
-
 
     if (this.form.departureAirport==null||this.form.departureTime==null //TODO rendre plus "joli"
       ||this.form.departureDate==null||this.form.arrivalAirport==null
@@ -60,7 +51,7 @@ export class NewTripPage {
 
 
   // message: Validation OK
-  presentToast() { //TODO executer si pas d'erreur d"envoi
+  presentToast() { //TODO executer si pas d'erreur d'envoi
     let toast = this.toastCtrl.create({
       message: 'This trip was successfully added ! ',
       duration: 3000
