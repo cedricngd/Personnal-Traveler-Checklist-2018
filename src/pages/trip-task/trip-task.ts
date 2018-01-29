@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController} from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController,ToastController} from 'ionic-angular';
 import { TasksProvider } from '../../providers/tasks/tasks';
 
 @IonicPage()
@@ -21,7 +21,7 @@ export class TripTaskPage {
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    public tasksProvider:TasksProvider,/*public alertCtrl: AlertController*/) {
+    public tasksProvider:TasksProvider,public toastCtrl: ToastController) {
 
       this.tasksSelection="todo"; // by default, display tasks to be done
       this.trip = navParams.get('trip'); // get the trip informations from trip.ts
@@ -98,10 +98,22 @@ export class TripTaskPage {
         "isVisible":	true,
       }
 
+      this.presentToast();
+      /*
       this.tasksProvider.addTasks(task).subscribe(data=>{
           console.log("add new task", data);
-        });
+        });*/
 
     }
+
+
+    presentToast() {
+      let toast = this.toastCtrl.create({
+        message: 'Not yet implemented... It will be soon !',
+        duration: 3000
+      });
+      toast.present();
+    }
+
 
   }

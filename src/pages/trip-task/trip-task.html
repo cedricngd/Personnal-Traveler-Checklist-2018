@@ -29,11 +29,6 @@ TODO ion-button full
       <ion-list  *ngSwitchCase="'todo'">
         <h5  ion-text color="orange"> Tasks to be done :</h5>
         <ion-item-sliding *ngFor="let task  of toDoTasks">
-          <!--
-        <ion-item>
-                    <button ion-button full  no-lines (click)="showTaskInfo(task)">{{task.title}}</button>
-          </ion-item>
--->
           <ion-item>
               <button ion-item no-lines (click)="showTaskInfo(task)">{{task.title}}</button>
           </ion-item>

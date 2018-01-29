@@ -11,13 +11,11 @@ export class TripsProvider {
 
   constructor(public http:HttpClient,  public authProvider: AuthentificationProvider) {
   }
+
   // retreive the trips from the server
   public getRemoteTrips(){
-    this.http.get("http://127.0.0.1:8000/countries/",{headers:this.authProvider.createHeader()}).subscribe(data=>{
-      console.log("countriezsssssss",data);
-    });
     return this.http.get(this.baseUrl1+this.tripUrl,{headers:this.authProvider.createHeader()});
-}
+  }
 
   //send the trip to the server
   public setRemoteTrip(form:any){
@@ -54,6 +52,13 @@ export class TripsProvider {
       arrival_date_time: arrivalTime,
       segments: []
     };
+  }
+
+  // Get the list of all countries in the world
+  public getCountries(){
+    this.http.get("http://127.0.0.1:8000/countries/",{headers:this.authProvider.createHeader()}).subscribe(data=>{
+      console.log("countriezsssssss",data);
+    });
   }
 
 }
