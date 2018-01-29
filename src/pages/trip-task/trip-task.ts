@@ -21,7 +21,7 @@ export class TripTaskPage {
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    public tasksProvider:TasksProvider,public alertCtrl: AlertController) {
+    public tasksProvider:TasksProvider,/*public alertCtrl: AlertController*/) {
 
       this.tasksSelection="todo"; // by default, display tasks to be done
       this.trip = navParams.get('trip'); // get the trip informations from trip.ts
@@ -35,6 +35,7 @@ export class TripTaskPage {
     ionViewDidLoad() {
     }
 
+    // sort tasks in 3 categories: tasks to do, checked tasks  and unwanted tasks
     sortTasks(id){
       this.tasksDone=[];
       this.toDoTasks=[];
@@ -65,12 +66,9 @@ export class TripTaskPage {
 
 
     showTaskInfo(task:any){
-      let alert = this.alertCtrl.create({
-       title: task.title,
-       subTitle: task.comments,
-       buttons: ['OK']
-      });
-      alert.present();
+      if(task.comments != "" && task.comments != null){
+          this.tasksProvider.getTaskInfo(task).present();
+      }
     }
 
     deleteTask(task:any){

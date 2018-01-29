@@ -1,5 +1,6 @@
 <!--
 <ion-navbar color="primary" no-border-bottom>
+TODO ion-button full
 -->
 <ion-header>
 
@@ -24,48 +25,18 @@
 
 <ion-content padding>
 
-
-
-<!--
-  <ion-list no-lines>
-  		<ion-item-sliding #slidingItem *ngFor="let trip of trips">
-  			<ion-item>
-  				<ion-label>{{trip.departure_country}} => {{trip.arrival_country}}</ion-label>
-  				<ion-checkbox color="primary" [(ngModel)]="isChecked" (ionChange)="updateCucumber()"></ion-checkbox>
-  			</ion-item>
-  				<ion-item-options>
-  					<button ion-button large color="danger" (click)="deleteTrip(trip)">
-  						<ion-icon name="trash"></ion-icon>
-  					</button>
-  				</ion-item-options>
-  		</ion-item-sliding>
-  </ion-list>
-
-
-<!--
-<ion-list>
   <div [ngSwitch]="tasksSelection">
-    <div float-left >
-      <ion-checkbox name="receive_calls">
-      </ion-checkbox>
-    </div>
-    <div float-right  >
-      <button ion-item item-end no-lines (click)="showTaskInfo(task)">task.title</button>
-    </div>
-  </div>
-</ion-list>
-
-<ion-checkbox item-start color="primary" [(ngModel)]="isChecked" (ionChange)="updateCucumber()"></ion-checkbox>
--->
-  <div [ngSwitch]="tasksSelection">
-      <ion-list *ngSwitchCase="'todo'">
+      <ion-list  *ngSwitchCase="'todo'">
         <h5  ion-text color="orange"> Tasks to be done :</h5>
         <ion-item-sliding *ngFor="let task  of toDoTasks">
-
-          <ion-item>
-              <button ion-item item-end no-lines (click)="showTaskInfo(task)">{{task.title}}</button>
+          <!--
+        <ion-item>
+                    <button ion-button full  no-lines (click)="showTaskInfo(task)">{{task.title}}</button>
           </ion-item>
-
+-->
+          <ion-item>
+              <button ion-item no-lines (click)="showTaskInfo(task)">{{task.title}}</button>
+          </ion-item>
           <ion-item-options>
             <button ion-button large color="secondary" (click)="taskDone(task)">
               <ion-icon name="checkmark"></ion-icon>

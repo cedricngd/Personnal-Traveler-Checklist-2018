@@ -11,7 +11,12 @@ display all the user's tasks
 
 
 <ion-content padding>
-<h3 ion-text color="primary">
-  Here will be showed the 20 most urgent tasks
-</h3>
+  <h5  ion-text color="orange"> Tasks to be done :</h5>
+
+  <ion-list no-lines>
+    <button ion-item *ngFor="let task of toDoTasks" >
+      {{ task.title }}
+    </button>
+  </ion-list>
+
 </ion-content>

@@ -1,5 +1,6 @@
 import { HttpClient} from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { AlertController} from 'ionic-angular';
 import { AuthentificationProvider } from '../../providers/authentification/authentification';
 
 
@@ -7,19 +8,22 @@ import { AuthentificationProvider } from '../../providers/authentification/authe
 export class TasksProvider {
   private baseUrl = 'http://127.0.0.1:8000/trips/';
 
-  constructor(public http:HttpClient,  public authProvider: AuthentificationProvider) {
+  constructor(public http:HttpClient,  public authProvider: AuthentificationProvider,
+              public alertCtrl: AlertController) {
   }
 
+  // not used
   public generateRemoteTasks(id){
     return this.http.get(this.baseUrl+id+'/generate_tasks/',{headers:this.authProvider.createHeader()});
   }
 
-
+  // get tasks from a specific trip
   public getRemoteTasksById(id){
     return this.http.get(this.baseUrl+id+'/tasks/',{headers:this.authProvider.createHeader()});
   }
 
-public getAllRemoteTasks(id){
+  // get all the tasks
+  public getAllRemoteTasks(){
     return this.http.get('http://127.0.0.1:8000/tasks/',{headers:this.authProvider.createHeader()});
   }
 
@@ -38,6 +42,16 @@ public getAllRemoteTasks(id){
 
   public addTasks(task:any){
     return this.http.post('http://127.0.0.1:8000/tasks/',task,{headers:this.authProvider.createHeader()});
+  }
+
+  // get info about a specific task 
+  getTaskInfo(task:any){
+    let alert = this.alertCtrl.create({
+     title: task.title,
+     subTitle: task.comments,
+     buttons: ['OK']
+    });
+    return alert;
   }
 
 }
