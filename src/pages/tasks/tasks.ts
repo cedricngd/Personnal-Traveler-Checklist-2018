@@ -43,5 +43,11 @@ export class TasksPage {
 
   }
 
+  showTaskInfo(task:any){
+    if(task.comments != "" && task.comments != null){
+        this.tasksProvider.getTaskInfo(task).present();
+    }
+  }
+
 
 }

@@ -23,7 +23,7 @@ export class ProfilePage {
     console.log('ionViewDidLoad ProfilePage');
   }
   private editProfile(){
-    
+
   }
 
 }

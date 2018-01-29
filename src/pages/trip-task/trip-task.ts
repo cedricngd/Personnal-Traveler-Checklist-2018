@@ -32,8 +32,6 @@ export class TripTaskPage {
       this.sortTasks(this.id);
     }
 
-    ionViewDidLoad() {
-    }
 
     // sort tasks in 3 categories: tasks to do, checked tasks  and unwanted tasks
     sortTasks(id){
