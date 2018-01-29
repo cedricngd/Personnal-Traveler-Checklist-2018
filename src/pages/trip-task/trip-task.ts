@@ -39,7 +39,7 @@ export class TripTaskPage {
       this.tasksDone=[];
       this.toDoTasks=[];
       this.deletedTasks=[];
-      this.tasksProvider.getRemoteTasks(id).subscribe((allTasks:any[])=>{
+      this.tasksProvider.getRemoteTasksById(id).subscribe((allTasks:any[])=>{
         for(let i =0;i<allTasks.length;i++){
           if(allTasks[i].completed==true && allTasks[i].isVisible==true){
             // add this task to the checked tasks
@@ -54,12 +54,6 @@ export class TripTaskPage {
             this.deletedTasks.push(allTasks[i]);
           }
         }
-          console.log("toDoTasks: ",this.toDoTasks);
-        /*
-        console.log("task Done: ",this.tasksDone);
-        console.log("toDoTasks: ",this.toDoTasks);
-        console.log("deletedTask: ",this.deletedTasks);
-        */
       });
     }
 

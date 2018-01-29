@@ -26,13 +26,6 @@ export class AuthentificationProvider {
 
 
   public createHeader(){
-    /*
-    let headers = new HttpHeaders(
-    {
-      "Content-type" : "application/json",
-      'Authorization' : 'token '+ this.token
-    });
-    */
     let headers = new HttpHeaders()
     .set('Authorization','Token '+ this.token.token)
     .set("Content-type", "application/json");

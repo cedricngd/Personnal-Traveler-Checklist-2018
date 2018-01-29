@@ -15,8 +15,12 @@ export class TasksProvider {
   }
 
 
-  public getRemoteTasks(id){
+  public getRemoteTasksById(id){
     return this.http.get(this.baseUrl+id+'/tasks/',{headers:this.authProvider.createHeader()});
+  }
+
+public getAllRemoteTasks(id){
+    return this.http.get('http://127.0.0.1:8000/tasks/',{headers:this.authProvider.createHeader()});
   }
 
   //change a field in the Task JSON
