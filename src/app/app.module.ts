@@ -37,7 +37,8 @@ import { ProfileProvider } from '../providers/profile/profile';
   imports: [
     BrowserModule,
     HttpClientModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+
   ],
   bootstrap: [IonicApp],
   entryComponents: [

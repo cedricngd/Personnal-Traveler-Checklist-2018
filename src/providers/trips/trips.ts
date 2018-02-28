@@ -20,6 +20,7 @@ export class TripsProvider {
   //send the trip to the server
   public setRemoteTrip(form:any){
     this.data =  this.JSONFormat(form);
+    console.log (this.data);
     this.http.post(this.baseUrl1+this.tripUrl,this.data,{headers:this.authProvider.createHeader()})
     .subscribe(data => {
       this.data.response = data["_body"]; //https://stackoverflow.com/questions/39574305/property-body-does-not-exist-on-type-response
@@ -39,16 +40,20 @@ export class TripsProvider {
   private JSONFormat(form:any){
     let departureTime = form.departureDate+"T"+form.departureTime+"Z";
     let arrivalTime =  form.arrivalDate+"T"+form.arrivalTime+"Z";
-
+/*
     let DepartureCountry_IATA=form.departureAirport.split("-");
     let ArrivalCountry_IATA=form.arrivalAirport.split("-");
-
+*/
     return {
+      /*
       departure_airport:DepartureCountry_IATA[1],
       departure_country:DepartureCountry_IATA[0],
+      */
+      departure_airport:"xxx",
+      departure_country:form.departureCountry,
       departure_date_time: departureTime,
-      arrival_airport: ArrivalCountry_IATA[1],
-      arrival_country: ArrivalCountry_IATA[0],
+      arrival_airport: "xxx",
+      arrival_country: form.arrivalCountry,
       arrival_date_time: arrivalTime,
       segments: []
     };
@@ -56,9 +61,8 @@ export class TripsProvider {
 
   // Get the list of all countries in the world
   public getCountries(){
-    this.http.get("http://127.0.0.1:8000/countries/",{headers:this.authProvider.createHeader()}).subscribe(data=>{
-      console.log("countriezsssssss",data);
-    });
+    return this.http.get("http://127.0.0.1:8000/countries/",{headers:this.authProvider.createHeader()});
+
   }
 
 }

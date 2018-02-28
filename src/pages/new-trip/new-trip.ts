@@ -9,35 +9,47 @@ import { TripsProvider } from '../../providers/trips/trips';
   templateUrl: 'new-trip.html',
 })
 export class NewTripPage {
-  public form={"departureAirport":null,"departureDate":null,"departureTime":null,
-                "arrivalAirport":null,"arrivalDate":null ,"arrivalTime":null}; // JSON to be transfered
-  public data=[];
+  public form={"departureCountry":null,"departureDate":null,"departureTime":null,
+                "arrivalCountry":null,"arrivalDate":null ,"arrivalTime":null}; // JSON to be transfered
+  //public data=[];
 
-  public departureAirport:any;
+  public departureCountry:any;
   public departureDate:any;
   public departureTime:any;
-  public arrivalAirport:any;
+  public arrivalCountry:any;
   public arrivalDate:any;
   public arrivalTime:any;
 
+  public countries: any[];
 
   constructor(public navCtrl: NavController, private view:ViewController, params: NavParams,
   public tripsProvider:TripsProvider,public toastCtrl:ToastController, public alertCtrl: AlertController) {
-    //console.log("new trips: ",params.get(''));
-  }
+    this.countries=[];
+    this.tripsProvider.getCountries().subscribe(data=>{
+      var countriesList:any[];
+      countriesList=data;
+      for(let i =0;i<countriesList.length;i++){
+        this.countries.push(countriesList[i].name);
+      }
+      ///console.log("this.countries=",this.countries);
 
+
+
+    });
+
+  }
 
   // Validation of a new trip
   validateTrip(){  //TODO possibilité d'aller retour
-    this.form.arrivalAirport=this.arrivalAirport;
+    this.form.arrivalCountry=this.arrivalCountry;
     this.form.arrivalDate=this.arrivalDate;
     this.form.arrivalTime=this.arrivalTime;
-    this.form.departureAirport=this.departureAirport;
+    this.form.departureCountry=this.departureCountry;
     this.form.departureDate=this.departureDate;
     this.form.departureTime=this.departureTime;
 
-    if (this.form.departureAirport==null||this.form.departureTime==null //TODO rendre plus "joli"
-      ||this.form.departureDate==null||this.form.arrivalAirport==null
+    if (this.form.departureCountry==null||this.form.departureTime==null //TODO rendre plus "joli"
+      ||this.form.departureDate==null||this.form.arrivalCountry==null
       ||this.form.arrivalTime==null||  this.form.arrivalDate==null){
         this.showAlert();
     }

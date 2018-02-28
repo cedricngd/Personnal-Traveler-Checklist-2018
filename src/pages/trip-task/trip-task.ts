@@ -98,11 +98,11 @@ export class TripTaskPage {
         "isVisible":	true,
       }
 
-      this.presentToast();
-      /*
+      //this.presentToast();
+
       this.tasksProvider.addTasks(task).subscribe(data=>{
           console.log("add new task", data);
-        });*/
+        });
 
     }
 
