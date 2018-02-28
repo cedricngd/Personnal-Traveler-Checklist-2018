@@ -20,8 +20,9 @@
       </ion-list-header>
     <ion-item>
       <ion-label>Departure airport</ion-label>
-        <ion-select [(ngModel)]="departureCountry">
-          <ion-option *ngFor="let country of countries" [value]="country">{{country}}</ion-option>
+        <ion-select interface="popover" [(ngModel)]="departureCountry">
+          <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+          <ion-option  *ngFor="let country of countries" [value]="country">{{country}}</ion-option>
         </ion-select>
     </ion-item>
 
@@ -42,7 +43,7 @@
     </ion-list-header>
     <ion-item>
       <ion-label>Arrival airport</ion-label>
-        <ion-select [(ngModel)]="arrivalCountry">
+        <ion-select interface="popover" [(ngModel)]="arrivalCountry">
           <ion-option *ngFor="let country of countries" [value]="country">{{country}}</ion-option>
         </ion-select>
     </ion-item>

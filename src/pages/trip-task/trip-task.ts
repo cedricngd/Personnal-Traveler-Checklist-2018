@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController,ToastController} from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController,ToastController,
+ModalController} from 'ionic-angular';
 import { TasksProvider } from '../../providers/tasks/tasks';
 
 @IonicPage()
@@ -21,7 +22,8 @@ export class TripTaskPage {
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    public tasksProvider:TasksProvider,public toastCtrl: ToastController) {
+    public tasksProvider:TasksProvider,public toastCtrl: ToastController,
+  public addCustomTaskModal:ModalController) {
 
       this.tasksSelection="todo"; // by default, display tasks to be done
       this.trip = navParams.get('trip'); // get the trip informations from trip.ts
@@ -87,15 +89,19 @@ export class TripTaskPage {
 
     //add a new task for this trip
     public addTask(){
-
+      let modal= this.addCustomTaskModal.create('addCustomTaskPage');
+      modal.onDidDismiss(() => {
+      });
+      modal.present();
+      
       let task={
-        "trip": "http://127.0.0.1:8000/trips/"+this.id+"/",
+        "trip": this.id,
         "title":	"Test",
         "deadline":	null,
-        "completed":	true,
+        "completed":	false,
         "comments": "ceci est un test",
-        "auto":	true,
-        "isVisible":	true,
+        "auto":	false,
+        "isVisible":true,
       }
 
       //this.presentToast();
