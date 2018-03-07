@@ -23,13 +23,10 @@ export class AddCustomTaskPage {
   //get the id of the corresponding trip
   ionViewWillLoad(){
     this.tripId= this.navParams.get('id');
-
   }
 
-
+  // create a new task
   createTask(){
-    //console.log(this.title);
-
     this.tasksProvider.addTasks(this.title, this.comments, this.tripId).subscribe(data=>{
         this.close();
       });
@@ -37,7 +34,6 @@ export class AddCustomTaskPage {
 
   close(){
     this.view.dismiss();
-
   }
 
 }

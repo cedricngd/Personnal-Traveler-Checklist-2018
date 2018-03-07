@@ -21,7 +21,6 @@
     <ion-item>
       <ion-label>Departure airport</ion-label>
         <ion-select interface="popover" [(ngModel)]="departureCountry">
-          <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
           <ion-option  *ngFor="let country of countries" [value]="country">{{country}}</ion-option>
         </ion-select>
     </ion-item>

@@ -36,7 +36,7 @@ export class TasksProvider {
       return this.http.patch(taskUrl,{isVisible:isVisible},{headers:this.authProvider.createHeader()});
     }
     else{
-      console.error("Error in tasks.updateTask()");
+      console.error("Error in tasks.updateTask() (provider/task/tasks.ts)");
     }
   }
 

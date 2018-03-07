@@ -31,7 +31,6 @@ export class NewTripPage {
       for(let i =0;i<countriesList.length;i++){
         this.countries.push(countriesList[i].name);
       }
-      ///console.log("this.countries=",this.countries);
     });
 
   }
@@ -44,7 +43,7 @@ export class NewTripPage {
     this.form.departureCountry=this.departureCountry;
     this.form.departureDate=this.departureDate;
     this.form.departureTime=this.departureTime;
-
+    console.log("aaaaaaaaaaaaaaaaaaaaaaa", this.form);
     if (this.form.departureCountry==null||this.form.departureTime==null //TODO rendre plus "joli"
       ||this.form.departureDate==null||this.form.arrivalCountry==null
       ||this.form.arrivalTime==null||  this.form.arrivalDate==null){
