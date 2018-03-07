@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController,ToastController} from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController,ToastController,
+ModalController} from 'ionic-angular';
 import { TasksProvider } from '../../providers/tasks/tasks';
+import { AddCustomTaskPage } from '../add-custom-task/add-custom-task';
+
 
 @IonicPage()
 @Component({
@@ -21,11 +24,11 @@ export class TripTaskPage {
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    public tasksProvider:TasksProvider,public toastCtrl: ToastController) {
+    public tasksProvider:TasksProvider,public toastCtrl: ToastController,
+  public addCustomTaskModal: ModalController) {
 
       this.tasksSelection="todo"; // by default, display tasks to be done
       this.trip = navParams.get('trip'); // get the trip informations from trip.ts
-      console.log("trip",this.trip);
       this.departure = this.trip.departure_country;
       this.arrival = this.trip.arrival_country;
       this.id=this.trip.id;
@@ -87,7 +90,12 @@ export class TripTaskPage {
 
     //add a new task for this trip
     public addTask(){
+    let modal= this.addCustomTaskModal.create(AddCustomTaskPage,{id:this.id}); //TODO faire en lazy loading
+    modal.onDidDismiss(() => {
 
+    });
+    modal.present();
+/*
       let task={
         "trip": "http://127.0.0.1:8000/trips/"+this.id+"/",
         "title":	"Test",
@@ -104,6 +112,7 @@ export class TripTaskPage {
           console.log("add new task", data);
         });
 
+*/
     }
 
 

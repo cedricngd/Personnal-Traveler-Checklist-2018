@@ -40,11 +40,28 @@ export class TasksProvider {
     }
   }
 
-  public addTasks(task:any){
-    return this.http.post('http://127.0.0.1:8000/tasks/',task,{headers:this.authProvider.createHeader()});
+  public addTasks(title:any,comments:any,tripId:any){
+
+    return this.http.post('http://127.0.0.1:8000/tasks/',this.jsonFormat(title,comments,tripId),{headers:this.authProvider.createHeader()});
   }
 
-  // get info about a specific task 
+  // format JSON to create a new task
+  public jsonFormat(title:any,comments:any,tripId:any){
+
+    let task={
+      "trip": tripId,
+      "title":	title,
+      "deadline":	null,
+      "completed":	false,
+      "comments": comments,
+      "auto":	false,
+      "isVisible":	true,
+    }
+    console.log ("on va envoyer:",task);
+    return task;
+  }
+
+  // get info about a specific task
   getTaskInfo(task:any){
     let alert = this.alertCtrl.create({
      title: task.title,

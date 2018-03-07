@@ -1,0 +1,31 @@
+<!--
+-->
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Adding a task</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="close()">Close</button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content  >
+
+    <h5 padding-top padding-left >Enter the title of the task:</h5>
+    <ion-item >
+      <ion-input type="text" clearInput= true [(ngModel)]="title"></ion-input>
+    </ion-item>
+
+    <h5 padding-top padding-left >Enter a short description (optional):</h5>
+    <ion-item>
+      <ion-input  type="text" clearInput= true [(ngModel)]="comments"></ion-input>
+    </ion-item>
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <button ion-button full (click)= "createTask()" >Create task  </button>
+  </ion-toolbar>
+</ion-footer>

@@ -25,6 +25,7 @@ export class TripsPage {
     this.tripsProvider.getRemoteTrips().subscribe(data=>{
           this.trips=data;
         });
+
   }
 
 
