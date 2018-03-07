@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController,ToastController,
 ModalController} from 'ionic-angular';
 import { TasksProvider } from '../../providers/tasks/tasks';
-import { AddCustomTaskPage } from '../add-custom-task/add-custom-task';
+//import { AddCustomTaskPage } from '../add-custom-task/add-custom-task';
 
 
 @IonicPage()
@@ -100,7 +100,7 @@ export class TripTaskPage {
     //add a new task for this trip
     public addTask(){
 
-      let modal= this.addCustomTaskModal.create(AddCustomTaskPage,{id:this.id}); //TODO faire en lazy loading
+      let modal= this.addCustomTaskModal.create('AddCustomTaskPage',{id:this.id}); //TODO faire en lazy loading
       modal.onDidDismiss(() => {
         this.updateTasks(this.id);
       });

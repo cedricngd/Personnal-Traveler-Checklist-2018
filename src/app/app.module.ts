@@ -12,7 +12,7 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { TripTaskPage } from '../pages/trip-task/trip-task';
 import { LoginPage } from '../pages/login/login';
 
-import { AddCustomTaskPage } from '../pages/add-custom-task/add-custom-task';
+//import { AddCustomTaskPage } from '../pages/add-custom-task/add-custom-task';
 
 
 
@@ -33,7 +33,7 @@ import { ProfileProvider } from '../providers/profile/profile';
     TabsPage,
     TripTaskPage,
     LoginPage,
-    AddCustomTaskPage,
+  //  AddCustomTaskPage,
 
 
   ],
@@ -52,8 +52,8 @@ import { ProfileProvider } from '../providers/profile/profile';
     TabsPage,
     TripTaskPage,
     LoginPage,
-    AddCustomTaskPage,
- 
+  //  AddCustomTaskPage,
+
   ],
   providers: [
     StatusBar,
