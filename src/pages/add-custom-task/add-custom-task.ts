@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+
 import { IonicPage, NavController, NavParams,ViewController, } from 'ionic-angular';
 import { TasksProvider } from '../../providers/tasks/tasks';
 
@@ -9,6 +10,7 @@ import { TasksProvider } from '../../providers/tasks/tasks';
   templateUrl: 'add-custom-task.html',
 })
 export class AddCustomTaskPage {
+
 
   public title:any;
   public comments:any;
@@ -35,6 +37,7 @@ export class AddCustomTaskPage {
 
   close(){
     this.view.dismiss();
+
   }
 
 }

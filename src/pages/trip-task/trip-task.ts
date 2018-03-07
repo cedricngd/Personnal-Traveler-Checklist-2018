@@ -27,6 +27,7 @@ export class TripTaskPage {
     public tasksProvider:TasksProvider,public toastCtrl: ToastController,
   public addCustomTaskModal: ModalController) {
 
+
       this.tasksSelection="todo"; // by default, display tasks to be done
       this.trip = navParams.get('trip'); // get the trip informations from trip.ts
       this.departure = this.trip.departure_country;
@@ -90,20 +91,22 @@ export class TripTaskPage {
 
     //add a new task for this trip
     public addTask(){
+
     let modal= this.addCustomTaskModal.create(AddCustomTaskPage,{id:this.id}); //TODO faire en lazy loading
     modal.onDidDismiss(() => {
 
     });
     modal.present();
 /*
+
       let task={
-        "trip": "http://127.0.0.1:8000/trips/"+this.id+"/",
+        "trip": this.id,
         "title":	"Test",
         "deadline":	null,
-        "completed":	true,
+        "completed":	false,
         "comments": "ceci est un test",
-        "auto":	true,
-        "isVisible":	true,
+        "auto":	false,
+        "isVisible":true,
       }
 
       //this.presentToast();
