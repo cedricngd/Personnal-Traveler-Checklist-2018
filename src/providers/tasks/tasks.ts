@@ -41,7 +41,6 @@ export class TasksProvider {
   }
 
   public addTasks(title:any,comments:any,tripId:any){
-
     return this.http.post('http://127.0.0.1:8000/tasks/',this.jsonFormat(title,comments,tripId),{headers:this.authProvider.createHeader()});
   }
 
@@ -57,7 +56,6 @@ export class TasksProvider {
       "auto":	false,
       "isVisible":	true,
     }
-    console.log ("on va envoyer:",task);
     return task;
   }
 
