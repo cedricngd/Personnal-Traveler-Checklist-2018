@@ -47,6 +47,9 @@ export class TripTaskPage {
       this.tasksProvider.getRemoteTasksById(id).subscribe((allTasks:any[])=>{
         this.sortTask(allTasks);
       });
+      console.log("tasksDone",this.tasksDone)
+      console.log("toDoTasks: ",this.toDoTasks)
+
     }
 
     // sort tasks in 3 categories: tasks to do, checked tasks  and unwanted tasks
@@ -100,7 +103,7 @@ export class TripTaskPage {
     //add a new task for this trip
     public addTask(){
 
-      let modal= this.addCustomTaskModal.create('AddCustomTaskPage',{id:this.id}); //TODO faire en lazy loading
+      let modal= this.addCustomTaskModal.create('AddCustomTaskPage',{id:this.id});
       modal.onDidDismiss(() => {
         this.updateTasks(this.id);
       });

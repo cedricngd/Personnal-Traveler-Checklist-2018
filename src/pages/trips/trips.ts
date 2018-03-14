@@ -24,6 +24,7 @@ export class TripsPage {
   updateTrips(){
     this.tripsProvider.getRemoteTrips().subscribe(data=>{
           this.trips=data;
+          console.log("le voyage: get ",this.trips);
         });
 
   }

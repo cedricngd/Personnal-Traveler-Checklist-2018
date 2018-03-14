@@ -36,7 +36,7 @@
 		<ion-item-sliding #slidingItem *ngFor="let trip  of trips">
 			<ion-item>
 				<button ion-item no-lines (click)="showTasks(trip)" >
-					{{trip.departure_country}}  <ion-icon end name="arrow-forward"></ion-icon>  {{trip.arrival_country}}
+					{{trip.departure_country.name}}  <ion-icon end name="arrow-forward"></ion-icon>  {{trip.arrival_country.name}}
 				</button>
 			</ion-item>
 			<ion-item-options>

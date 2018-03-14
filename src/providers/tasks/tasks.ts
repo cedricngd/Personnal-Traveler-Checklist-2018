@@ -27,12 +27,12 @@ export class TasksProvider {
     return this.http.get('http://127.0.0.1:8000/tasks/',{headers:this.authProvider.createHeader()});
   }
 
-  //change a field in the Task JSON
+  //change a field in the JSON Task
   public updateTask(taskUrl:any,completed:boolean,isVisible:boolean){
     if(isVisible==null){// set a task to "completed" (task.completed =true) or "not completed yet" (task.completed =false)
     return this.http.patch(taskUrl,{completed:completed},{headers:this.authProvider.createHeader()});
     }
-    else if (completed == null){ // set if the task is displaying or not
+    else if (completed == null){ // set if the task is displayed  or not
       return this.http.patch(taskUrl,{isVisible:isVisible},{headers:this.authProvider.createHeader()});
     }
     else{
