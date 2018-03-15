@@ -13,10 +13,13 @@ import { TripsProvider } from '../../providers/trips/trips';
 export class TripsPage {
   public trips:any;
   public token:any;
+  public baseUrl:string;
 
   constructor(public navCtrl: NavController,public tripsProvider:TripsProvider,
     public newTripModal:ModalController, public toastCtrl:ToastController) {
+      this.baseUrl= this.tripsProvider.baseUrl;
       this.updateTrips();
+
       }
 
 
@@ -24,13 +27,13 @@ export class TripsPage {
   updateTrips(){
     this.tripsProvider.getRemoteTrips().subscribe(data=>{
           this.trips=data;
-          console.log("le voyage: get ",this.trips);
+          console.log(this.trips)
         });
 
   }
 
 
-  showTasks(trip){
+  showTasks(trip:any){
     this.navCtrl.push(TripTaskPage,{
       trip:trip
     });
@@ -58,14 +61,13 @@ export class TripsPage {
   deleteTrip(trip:any){
     this.tripsProvider.deleteRemoteTrip(trip).subscribe(
       data=>{
-
-      this.updateTrips();
-      this.presentToast();
+        this.updateTrips();
+        this.presentToast();
       },
       error => {
-      console.log("Removing trip failed: ",error);
+        console.log("Removing trip failed: ",error);
       }
-      );
+    );
   }
 
   refreshTrips(refresher) {
@@ -76,4 +78,32 @@ export class TripsPage {
      }, 1000);
    }
 
+   getUrlPic(trip:any){
+
+     this.tripsProvider.getRemoteTripImg("Vietnam").subscribe(
+       data=>{
+         console.log("getUrlPic: ", data)
+
+       },
+       error => {
+         console.log("Retrieving trip image failed: ",error);
+       }
+     );
+
+   }
+/*
+   getUrlPic(){
+
+     this.tripsProvider.getRemoteTripImg("Vietnam").subscribe(
+       data=>{
+         this.url = data.image;
+         console.log("getUrlPic: ",data)
+         return  this.url.image;
+       },
+       error => {
+         console.log("Retrieving trip image failed: ",error);
+       }
+     );
+
+   }*/
 }

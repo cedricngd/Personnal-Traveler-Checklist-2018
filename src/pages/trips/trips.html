@@ -14,7 +14,7 @@
 </ion-header>
 
 
-<ion-content>
+<ion-content class="card-background-page">
 	<p ion-text color="primary" text-center >
 		<ion-icon end name="arrow-back"></ion-icon>
 			Swipe to remove
@@ -34,10 +34,15 @@
 
 	<ion-list>
 		<ion-item-sliding #slidingItem *ngFor="let trip  of trips">
+
 			<ion-item>
-				<button ion-item no-lines (click)="showTasks(trip)" >
-					{{trip.departure_country.name}}  <ion-icon end name="arrow-forward"></ion-icon>  {{trip.arrival_country.name}}
-				</button>
+				<ion-card (click)="showTasks(trip)">
+					 <img src="{{baseUrl}}media/country/{{trip.arrival_country}}.jpg"
+								onerror="this.src='assets/imgs/defaultTravelPic.jpg'"
+								ondragstart="return false;"/> 		<!-- To disable drag and drop on the image-->
+					 <div class="card-title"> To {{trip.arrival_country}} </div>
+					 <div class="card-subtitle"> From {{trip.departure_country}}</div>
+				 </ion-card>
 			</ion-item>
 			<ion-item-options>
 				<button ion-button large color="danger" (click)="deleteTrip(trip)">

@@ -4,7 +4,7 @@ import { AuthentificationProvider } from '../../providers/authentification/authe
 
 @Injectable()
 export class TripsProvider {
-  private baseUrl1 = 'http://127.0.0.1:8000/';
+  public baseUrl = 'http://127.0.0.1:8000/';
   private tripUrl= 'trips/';
 
   data:any = {};
@@ -14,14 +14,14 @@ export class TripsProvider {
 
   // retreive the trips from the server
   public getRemoteTrips(){
-    return this.http.get(this.baseUrl1+this.tripUrl,{headers:this.authProvider.createHeader()});
+    return this.http.get(this.baseUrl+this.tripUrl,{headers:this.authProvider.createHeader()});
   }
 
   //send the trip to the server
   public setRemoteTrip(form:any){
     this.data =  this.JSONFormat(form);
     console.log ("le trip envoyé: ",this.data);
-    this.http.post(this.baseUrl1+this.tripUrl,this.data,{headers:this.authProvider.createHeader()})
+    this.http.post(this.baseUrl+this.tripUrl,this.data,{headers:this.authProvider.createHeader()})
     .subscribe(data => {
       this.data.response = data["_body"]; //https://stackoverflow.com/questions/39574305/property-body-does-not-exist-on-type-response
     }, error => {
@@ -30,7 +30,7 @@ export class TripsProvider {
   }
 
   public deleteRemoteTrip(trip:any){
-    let ret=this.http.delete(this.baseUrl1+"trips/"+trip.id+"/",{headers:this.authProvider.createHeader()})
+    let ret=this.http.delete(this.baseUrl+"trips/"+trip.id+"/",{headers:this.authProvider.createHeader()})
     console.log(ret);
     return ret;
   }
@@ -53,8 +53,12 @@ export class TripsProvider {
 
   // Get the list of all countries in the world
   public getCountries(){
-    return this.http.get("http://127.0.0.1:8000/countries/",{headers:this.authProvider.createHeader()});
+    return this.http.get(this.baseUrl+"countries/",{headers:this.authProvider.createHeader()});
 
+  }
+
+  public getRemoteTripImg(country:any){
+    return this.http.get(this.baseUrl+"countries/"+country+"/",{headers:this.authProvider.createHeader()});
   }
 
 }

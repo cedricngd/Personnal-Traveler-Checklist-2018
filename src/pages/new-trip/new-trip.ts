@@ -11,7 +11,6 @@ import { TripsProvider } from '../../providers/trips/trips';
 export class NewTripPage {
   public form={"departureCountry":null,"departureDate":null,"departureTime":null,
                 "arrivalCountry":null,"arrivalDate":null ,"arrivalTime":null}; // JSON to be transfered
-  //public data=[];
 
   public departureCountry:any;
   public departureDate:any;
@@ -29,7 +28,7 @@ export class NewTripPage {
       var countriesList:any;
       countriesList=data;
       for(let i =0;i<countriesList.length;i++){
-        this.countries.push(countriesList[i].code);
+        this.countries.push(countriesList[i].name);
       }
     });
 
@@ -43,7 +42,7 @@ export class NewTripPage {
     this.form.departureCountry=this.departureCountry;
     this.form.departureDate=this.departureDate;
     this.form.departureTime=this.departureTime;
-    console.log("-------------------",this.form)
+
     if (this.form.departureCountry==null||this.form.departureTime==null //TODO rendre plus "joli"
       ||this.form.departureDate==null||this.form.arrivalCountry==null
       ||this.form.arrivalTime==null||  this.form.arrivalDate==null){
