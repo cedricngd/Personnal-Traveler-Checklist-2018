@@ -28,16 +28,9 @@ export class TasksProvider {
   }
 
   //change a field in the JSON Task
-  public updateTask(taskUrl:any,completed:boolean,isVisible:boolean){
-    if(isVisible==null){// set a task to "completed" (task.completed =true) or "not completed yet" (task.completed =false)
+  public updateTask(taskUrl:any,completed:boolean){
     return this.http.patch(taskUrl,{completed:completed},{headers:this.authProvider.createHeader()});
-    }
-    else if (completed == null){ // set if the task is displayed  or not
-      return this.http.patch(taskUrl,{isVisible:isVisible},{headers:this.authProvider.createHeader()});
-    }
-    else{
-      console.error("Error in tasks.updateTask() (provider/task/tasks.ts)");
-    }
+
   }
 
   public addTasks(title:any,comments:any,tripId:any){

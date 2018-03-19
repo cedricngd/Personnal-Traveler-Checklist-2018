@@ -16,9 +16,15 @@ export class TripTaskPage {
   public arrival:any;         // arrival country of the selected trip
 
 
-  public toDoTasks:any[];     // contains the remaining tasks
-  public tasksDone:any[];     // contains the already executed tasks
-  public deletedTasks:any[];  // contains the unwanted tasks
+  public toDoTasksHealth:any[];     // contains the remaining health related tasks
+  public tasksDoneHealth:any[];     // contains the already health related executed tasks
+
+  public toDoTasksPaperwork:any[];     // contains the remaining paperwork related tasks
+  public tasksDonePaperwork:any[];     // contains the already paperwork related executed tasks
+
+  public toDoTasksMisc:any[];     // contains the remaining miscellanous tasks
+  public tasksDoneMisc:any[];     // contains the already miscellanous executed tasks
+
   public tasksSelection:any;  // to select which kind of task will be showed
                               // when the page first appear
 
@@ -32,8 +38,8 @@ export class TripTaskPage {
 
     // set initial variables
     init(){
-      this.tasksSelection="todo"; // by default, display tasks to be done
-      let trip = this.navParams.get('trip'); // get the trip informations from trip.ts
+      this.tasksSelection="todo";             // by default, display tasks to be done
+      let trip = this.navParams.get('trip');  // get the trip informations from trip.ts
       this.departure = trip.departure_country;
       this.arrival = trip.arrival_country;
       this.id=trip.id;
@@ -41,38 +47,64 @@ export class TripTaskPage {
 
     // refresh the displayed tasks
     updateTasks(id){
-      this.tasksDone=[];
-      this.toDoTasks=[];
-      this.deletedTasks=[];
+      this.toDoTasksHealth=[];
+      this.tasksDoneHealth=[];
+
+      this.toDoTasksPaperwork=[];
+      this.tasksDonePaperwork=[];
+
+      this.toDoTasksMisc=[];
+      this.tasksDoneMisc=[];
+
       this.tasksProvider.getRemoteTasksById(id).subscribe((allTasks:any[])=>{
         this.sortTask(allTasks);
       });
-      console.log("tasksDone",this.tasksDone)
-      console.log("toDoTasks: ",this.toDoTasks)
+      console.log("tasksDone",this.toDoTasksHealth)
+      console.log("toDoTasks: ",this.tasksDoneHealth)
 
     }
 
-    // sort tasks in 3 categories: tasks to do, checked tasks  and unwanted tasks
+    // sort tasks in 3 categories: Health related and Paperwork related and other kinds
     sortTask(allTasks:any[]){
       for(let i =0;i<allTasks.length;i++){
-        if(allTasks[i].completed==true && allTasks[i].isVisible==true){
-          // add this task to the checked tasks
-          this.tasksDone.push(allTasks[i]);
+        if(allTasks[i].category=="Health" && allTasks[i].completed==true ){
+          // add this task to the checked health related tasks
+          this.tasksDoneHealth.push(allTasks[i]);
         }
-        else if (allTasks[i].completed==false && allTasks[i].isVisible==true){
-          // add this task to the tasks to be done
-          this.toDoTasks.push(allTasks[i]);
+        else if (allTasks[i].category=="Health" && allTasks[i].completed==false){
+          // add this task to the health related tasks to be done
+          this.toDoTasksHealth.push(allTasks[i]);
+        }
+        else if (allTasks[i].category=="Paperwork" && allTasks[i].completed==true){
+          this.tasksDonePaperwork.push(allTasks[i]);
+        }
+        else if (allTasks[i].category=="Paperwork" && allTasks[i].completed==false){
+          this.toDoTasksPaperwork.push(allTasks[i]);
+        }
+        else if (allTasks[i].category=="Others" && allTasks[i].completed==true){
+          this.tasksDoneMisc.push(allTasks[i]);
+        }
+        else if (allTasks[i].category=="Others" && allTasks[i].completed==false){
+          this.toDoTasksMisc.push(allTasks[i]);
         }
         else{
-          // add this task to the deleted tasks
-          this.deletedTasks.push(allTasks[i]);
+          console.error("error in trip-task.ts l65");
         }
       }
     }
 
-    // change either the completed field or the isVisible field of the given task
-    changeTask(task:any,completed:boolean,isVisible:boolean){
-      this.tasksProvider.updateTask(task.url,completed,isVisible).subscribe(data=>{
+    taskDone(task:any ){
+      this.changeTask(task,true);
+    }
+
+    taskToDo(task:any){
+      this.changeTask(task,false);
+    }
+
+
+    // change either the completed field of the given task
+    changeTask(task:any,completed:boolean){
+      this.tasksProvider.updateTask(task.url,completed).subscribe(data=>{
           this.updateTasks(task.trip);
         });
     }
@@ -84,25 +116,8 @@ export class TripTaskPage {
       }
     }
 
-    deleteTask(task:any){
-      this.changeTask(task,null,false);
-    }
-
-    restoreTask(task:any){
-      this.changeTask(task,null,true);
-    }
-
-    taskDone(task:any ){
-      this.changeTask(task,true,null);
-    }
-
-    taskToDo(task:any){
-      this.changeTask(task,false,null);
-    }
-
     //add a new task for this trip
     public addTask(){
-
       let modal= this.addCustomTaskModal.create('AddCustomTaskPage',{id:this.id});
       modal.onDidDismiss(() => {
         this.updateTasks(this.id);

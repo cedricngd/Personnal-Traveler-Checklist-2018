@@ -57,8 +57,4 @@ export class TripsProvider {
 
   }
 
-  public getRemoteTripImg(country:any){
-    return this.http.get(this.baseUrl+"countries/"+country+"/",{headers:this.authProvider.createHeader()});
-  }
-
 }

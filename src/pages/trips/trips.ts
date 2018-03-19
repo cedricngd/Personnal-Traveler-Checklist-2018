@@ -67,7 +67,7 @@ export class TripsPage {
       error => {
         console.log("Removing trip failed: ",error);
       }
-    );
+    ); 
   }
 
   refreshTrips(refresher) {
@@ -78,32 +78,4 @@ export class TripsPage {
      }, 1000);
    }
 
-   getUrlPic(trip:any){
-
-     this.tripsProvider.getRemoteTripImg("Vietnam").subscribe(
-       data=>{
-         console.log("getUrlPic: ", data)
-
-       },
-       error => {
-         console.log("Retrieving trip image failed: ",error);
-       }
-     );
-
-   }
-/*
-   getUrlPic(){
-
-     this.tripsProvider.getRemoteTripImg("Vietnam").subscribe(
-       data=>{
-         this.url = data.image;
-         console.log("getUrlPic: ",data)
-         return  this.url.image;
-       },
-       error => {
-         console.log("Retrieving trip image failed: ",error);
-       }
-     );
-
-   }*/
 }
