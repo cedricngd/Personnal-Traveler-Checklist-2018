@@ -19,18 +19,14 @@ TODO ion-button full
 </ion-header>
 
 
-<ion-content padding>
+<ion-content >
   <div [ngSwitch]="tasksSelection">
       <ion-list  *ngSwitchCase="'todo'">
         <h5  ion-text color="orange"> Tasks to be done :</h5>
 
         <!--Health related tasks to be done -->
         <div *ngIf="toDoTasksHealth.length">
-          <ion-item-group>
-            <ion-item-divider >
-              <img  src="assets/imgs/HealthTasks.jpg">
-            </ion-item-divider>
-
+          <img  src="assets/imgs/health.png" class="img">
           <ion-item-sliding *ngFor="let task  of toDoTasksHealth">
             <ion-item>
                 <button ion-item no-lines (click)="showTaskInfo(task)">{{task.title}}</button>
@@ -40,22 +36,16 @@ TODO ion-button full
                 <ion-icon name="checkmark"></ion-icon>
               </button>
             </ion-item-options>
-
           </ion-item-sliding>
-            </ion-item-group>
         </div>
         <div padding-bottom *ngIf="!toDoTasksHealth.length">
-             No remaining tasks: you're good to go !
+          <h6 ion-text> No remaining tasks: you're good to go !</h6>
         </div>
 
 
         <!-- Paperwork related tasks to be done -->
         <div *ngIf="toDoTasksPaperwork.length">
-          <ion-item-group>
-            <ion-item-divider >
-              <img  src="assets/imgs/documents.jpg">
-            </ion-item-divider>
-
+              <img  src="assets/imgs/paperwork.png">
           <ion-item-sliding *ngFor="let task  of toDoTasksPaperwork">
             <ion-item>
                 <button ion-item no-lines (click)="showTaskInfo(task)">{{task.title}}</button>
@@ -67,18 +57,14 @@ TODO ion-button full
             </ion-item-options>
 
           </ion-item-sliding>
-            </ion-item-group>
         </div>
         <div padding-bottom *ngIf="!toDoTasksPaperwork.length">
-             No remaining tasks: you're good to go !
+          <h6 ion-text> No remaining tasks: you're good to go !</h6>
         </div>
 
         <!-- Other related tasks to be done -->
         <div *ngIf="toDoTasksMisc.length">
-          <ion-item-group>
-            <ion-item-divider >
-              <img  src="assets/imgs/baggage.jpg">
-            </ion-item-divider>
+              <img  src="assets/imgs/other.png">
 
           <ion-item-sliding *ngFor="let task  of toDoTasksMisc">
             <ion-item>
@@ -91,10 +77,9 @@ TODO ion-button full
             </ion-item-options>
 
           </ion-item-sliding>
-            </ion-item-group>
         </div>
         <div padding-bottom *ngIf="!toDoTasksMisc.length">
-             No remaining tasks: you're good to go !
+             <h6 ion-text> No remaining tasks: you're good to go !</h6>
         </div>
 
       </ion-list>
@@ -102,12 +87,13 @@ TODO ion-button full
 
       <ion-list *ngSwitchCase="'done'">
         <h5  ion-text color="secondary"> Checked tasks:</h5>
+
+
+
+
         <!-- Checked health related tasks-->
         <div *ngIf="tasksDoneHealth.length">
-            <ion-item-group>
-              <ion-item-divider >
-                <img  src="assets/imgs/healthTasks.jpg">
-              </ion-item-divider>
+                <img  src="assets/imgs/health.png">
               <ion-item-sliding *ngFor="let task  of tasksDoneHealth">
                 <ion-item>
                   <button ion-item  no-lines (click)="showTaskInfo(task)">
@@ -120,18 +106,16 @@ TODO ion-button full
                   </button>
                 </ion-item-options>
               </ion-item-sliding>
-            </ion-item-group>
           </div>
         <div padding-bottom *ngIf="!tasksDoneHealth.length">
-             No tasks here...
+          <img  src="assets/imgs/healthTasks.jpg">
+          <h6 ion-text> No tasks here...</h6>
+
         </div>
 
       <!-- Checked Paperwork related tasks-->
       <div *ngIf="tasksDonePaperwork.length">
-        <ion-item-group>
-          <ion-item-divider >
-            <img  src="assets/imgs/documents.jpg">
-          </ion-item-divider>
+            <img  src="assets/imgs/paperwork.png">
           <ion-item-sliding *ngFor="let task  of tasksDonePaperwork">
             <ion-item>
               <button ion-item  no-lines (click)="showTaskInfo(task)">
@@ -144,19 +128,16 @@ TODO ion-button full
               </button>
             </ion-item-options>
           </ion-item-sliding>
-        </ion-item-group>
     </div>
     <div padding-bottom *ngIf="!tasksDonePaperwork.length">
-         No tasks here...
+      <img  src="assets/imgs/documents.jpg">
+      <h6 ion-text> No tasks here...</h6>
     </div>
 
 
     <!-- Checked other related tasks-->
     <div *ngIf="tasksDoneMisc.length">
-      <ion-item-group>
-        <ion-item-divider >
-          <img  src="assets/imgs/baggage.jpg">
-        </ion-item-divider>
+          <img  src="assets/imgs/other.png">
         <ion-item-sliding *ngFor="let task  of tasksDoneMisc">
           <ion-item>
             <button ion-item  no-lines (click)="showTaskInfo(task)">
@@ -169,12 +150,14 @@ TODO ion-button full
             </button>
           </ion-item-options>
         </ion-item-sliding>
-      </ion-item-group>
     </div>
     <div padding-bottom *ngIf="!tasksDoneMisc.length">
-         No tasks here...
+        <img  src="assets/imgs/other.png">
+        <h6 ion-text> No tasks here...</h6>
     </div>
   </ion-list>
+
+
   </div>
 
   <ion-fab right bottom>
