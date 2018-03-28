@@ -27,7 +27,7 @@
 
     <ion-item>
       <ion-label> Departure date</ion-label>
-      <ion-datetime displayFormat="YYYY-MMM-DD"  [(ngModel)]="departureDate"></ion-datetime>
+      <ion-datetime displayFormat="YYYY-MMM-DD" min="2018-04-01" max="2050-10-31" [(ngModel)]="departureDate"></ion-datetime>
     </ion-item>
 
     <ion-item>
@@ -49,12 +49,12 @@
 
     <ion-item>
       <ion-label> Arrival date</ion-label>
-      <ion-datetime displayFormat="YYYY-MMM-DD"  [(ngModel)]="arrivalDate"></ion-datetime>
+      <ion-datetime displayFormat="YYYY-MMM-DD" min="2018-04-01" max="2050-10-31"  [(ngModel)]="arrivalDate"></ion-datetime>
     </ion-item>
 
     <ion-item>
       <ion-label> HH/mm/ss</ion-label>
-      <ion-datetime displayFormat="HH:mm:ss" [(ngModel)]="arrivalTime"></ion-datetime>
+      <ion-datetime displayFormat="HH:mm:ss"  [(ngModel)]="arrivalTime"></ion-datetime>
     </ion-item>
 
 </ion-list>
