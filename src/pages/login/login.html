@@ -1,34 +1,31 @@
 
-<ion-header>
 
-  <ion-navbar  color="primary">
-    <ion-title>Please login</ion-title>
-  </ion-navbar>
-
-</ion-header>
-
-
-<ion-content padding class="bg">
-  <ion-list>
-
-    <ion-item>
-      <ion-label fixed>Username</ion-label>
-      <ion-input type="text" value=""></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label fixed>Password</ion-label>
-      <ion-input type="password"></ion-input>
-    </ion-item>
-
-  </ion-list>
+<ion-content  class="bg">
+  <div padding-top padding-bottom text-center class="head">
+    <h1>Personal Traveller Checklist </h1>
+    <h3>V2.0</h3>
+    <h5> Please enter your credentials: </h5>
+  </div>
 
 
+  <div class="inputs">
+    <ion-list>
+      <ion-item >
+        <ion-label >Username</ion-label>
+        <ion-input type="text" value=""></ion-input>
+      </ion-item>
 
+      <ion-item>
+        <ion-label >Password</ion-label>
+        <ion-input type="password"></ion-input>
+      </ion-item>
+    </ion-list>
 
-  <ion-buttons>
-    <button ion-button  full (click)="showTrips()">
-      Login
-    </button>
-  </ion-buttons>
+    <ion-buttons>
+      <button ion-button  full (click)="showTrips()">
+        Login
+      </button>
+    </ion-buttons>
+  </div>
+
 </ion-content>

@@ -14,12 +14,16 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+@font-face{
+  font-family: myFont;
 
+  src:
+  url('../assets/fonts/ubuntu.woff2') format('woff2'),
+  url('../assets/fonts/pacifico.woff2') format('woff2'),
+  url('../assets/fonts/notosans.woff2') format('woff2');
 
-.getstart {
+}
 
-background-image: url('../www/assets/imgs/logo.png');
-// background: url('../../img/getstart.png');
-background-repeat: no-repeat;
-background-size:cover;
+*{
+  font-family:myFont;
 }
