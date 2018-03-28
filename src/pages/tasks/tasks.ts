@@ -39,6 +39,8 @@ export class TasksPage {
             }
 
           }
+          console.log(this.toDoTasks)
+
         });
 
   }
