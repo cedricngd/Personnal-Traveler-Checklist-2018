@@ -19,7 +19,7 @@ TODO ion-button full
 </ion-header>
 
 
-<ion-content >
+<ion-content>
   <div [ngSwitch]="tasksSelection">
       <ion-list  *ngSwitchCase="'todo'">
         <h5  ion-text color="orange"> Tasks to be done :</h5>
@@ -38,9 +38,6 @@ TODO ion-button full
             </ion-item-options>
           </ion-item-sliding>
         </div>
-        <div padding-bottom *ngIf="!toDoTasksHealth.length">
-          <h6 ion-text> No remaining tasks: you're good to go !</h6>
-        </div>
 
 
         <!-- Paperwork related tasks to be done -->
@@ -58,9 +55,7 @@ TODO ion-button full
 
           </ion-item-sliding>
         </div>
-        <div padding-bottom *ngIf="!toDoTasksPaperwork.length">
-          <h6 ion-text> No remaining tasks: you're good to go !</h6>
-        </div>
+
 
         <!-- Other related tasks to be done -->
         <div *ngIf="toDoTasksMisc.length">
@@ -78,17 +73,17 @@ TODO ion-button full
 
           </ion-item-sliding>
         </div>
-        <div padding-bottom *ngIf="!toDoTasksMisc.length">
-             <h6 ion-text> No remaining tasks: you're good to go !</h6>
-        </div>
 
+        <div padding-bottom *ngIf="!toDoTasksMisc.length
+                                && !toDoTasksPaperwork.length
+                                && !toDoTasksHealth.length">
+            <h6 ion-text> No remaining tasks: you're good to go !</h6>
+        </div>
       </ion-list>
 
 
       <ion-list *ngSwitchCase="'done'">
         <h5  ion-text color="secondary"> Checked tasks:</h5>
-
-
 
 
         <!-- Checked health related tasks-->
@@ -107,11 +102,7 @@ TODO ion-button full
                 </ion-item-options>
               </ion-item-sliding>
           </div>
-        <div padding-bottom *ngIf="!tasksDoneHealth.length">
-          <img  src="assets/imgs/healthTasks.jpg">
-          <h6 ion-text> No tasks here...</h6>
 
-        </div>
 
       <!-- Checked Paperwork related tasks-->
       <div *ngIf="tasksDonePaperwork.length">
@@ -129,10 +120,7 @@ TODO ion-button full
             </ion-item-options>
           </ion-item-sliding>
     </div>
-    <div padding-bottom *ngIf="!tasksDonePaperwork.length">
-      <img  src="assets/imgs/documents.jpg">
-      <h6 ion-text> No tasks here...</h6>
-    </div>
+
 
 
     <!-- Checked other related tasks-->
@@ -151,9 +139,11 @@ TODO ion-button full
           </ion-item-options>
         </ion-item-sliding>
     </div>
-    <div padding-bottom *ngIf="!tasksDoneMisc.length">
-        <img  src="assets/imgs/other.png">
-        <h6 ion-text> No tasks here...</h6>
+
+    <div padding-bottom *ngIf="!tasksDoneMisc.length
+                            && !tasksDonePaperwork.length
+                            && !tasksDoneHealth.length">
+        <h6 ion-text> No tasks here for the moment...</h6>
     </div>
   </ion-list>
 
