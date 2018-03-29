@@ -15,10 +15,6 @@ export class LoginPage {
   public authProvider: AuthentificationProvider) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
-  }
-
   public showTrips(){
     this.navCtrl.push(TabsPage);
   }

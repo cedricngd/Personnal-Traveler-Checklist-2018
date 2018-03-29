@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,AlertController, ModalController } from 'ionic-angular';
 import { TasksProvider } from '../../providers/tasks/tasks';
+import { TripsProvider } from '../../providers/trips/trips';
 import * as moment from 'moment';
 
 @IonicPage()
@@ -10,7 +11,7 @@ import * as moment from 'moment';
 })
 export class TasksPage {
 
-  eventSource = [];
+  eventSource:any  = [];
   viewTitle: string;
   selectedDay = new Date();
 
@@ -20,11 +21,13 @@ export class TasksPage {
   };
 
   toDoTasks:any[];
+  trips:any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-  public tasksProvider:TasksProvider,  public modalCtrl: ModalController,
+  public tasksProvider:TasksProvider,  public tripProvider: TripsProvider,
    private alertCtrl: AlertController) {
     this.toDoTasks=[];
+    //this.trips=[];
 
   }
 
@@ -32,12 +35,14 @@ export class TasksPage {
   // runs when the page become active and get the updated todoTasks
   ionViewWillEnter (){
     this.getToDoTasks();
+    this.getTrips();
 
   }
 
-  // runs when the page has become inactive and clear the todoTasks
+  // runs when the page has become inactive and clear variables
   ionViewDidLeave() {
     this.toDoTasks=[];
+    this.eventSource = [];
   }
 
 
@@ -51,18 +56,67 @@ export class TasksPage {
             }
           }
           this.addTasksToCalendar();
-        });
 
+        });
+  }
+
+  getTrips(){
+    this.tripProvider.getRemoteTrips().subscribe(data=>{
+            this.trips=data;
+            this.addTripsToCalendar();
+        });
   }
 
 
   //Calendar callbacks
 
+  addTripsToCalendar(){
+    this.formatTripsDatesToUtc();
+    let events= this.eventSource; // all the previous entered tasks
+    for(let i =0;i<this.trips.length;i++){
+      events.push(this.trips[i]);
+    }
+    console.log("event",this.eventSource)
+    this.eventSource = [];
+    setTimeout(() => {
+      this.eventSource = events;
+    });
 
-  addEvent(){
   }
 
+  formatTripsDatesToUtc(){
+    for(let i =0;i<this.trips.length;i++){
 
+      let departure=this.trips[i].departure_date_time;
+      let arrival=this.trips[i].arrival_date_time;
+
+      let departureYear   = new Date(departure).getFullYear();
+      let departureMonth  = new Date(departure).getMonth();
+      let departureDay    = new Date(departure).getDate();
+      let departureHours  = new Date(departure).getHours();
+      let departureMinutes= new Date(departure).getMinutes();
+
+      let arrivalYear   = new Date(arrival).getFullYear();
+      let arrivalMonth  = new Date(arrival).getMonth();
+      let arrivalDay    = new Date(arrival).getDate();
+      let arrivalHours  = new Date(departure).getHours();
+      let arrivalMinutes= new Date(departure).getMinutes();
+
+      if(departureDay==arrivalDay && departureMonth==arrivalMonth && departureYear==arrivalYear){
+        arrivalDay+=1;
+      }
+
+      let tripData={   // data to be fed to the calendar
+        allDay:false,
+        startTime:new Date (Date.UTC( departureYear,departureMonth, departureDay, departureHours, departureMinutes)),
+        endTime:  new Date (Date.UTC( arrivalYear, arrivalMonth,arrivalDay,arrivalHours,arrivalMinutes)),
+        title: "Trip: " + this.trips[i].departure_country + " to " + this.trips[i].arrival_country
+      }
+      this.trips[i]=tripData;
+    }
+    console.log("voyage formate",this.trips)
+
+  }
 
   // adds tasks to calendar
   addTasksToCalendar() {
@@ -71,37 +125,13 @@ export class TasksPage {
     for(let i =0;i<this.toDoTasks.length;i++){
       events.push(this.toDoTasks[i]);
     }
-      console.log(events)
     this.eventSource = [];
     setTimeout(() => {
       this.eventSource = events;
+      this.toDoTasks=[];
     });
 
-
-/*
-
-    let modal = this.modalCtrl.create('EventModalPage', {selectedDay: this.selectedDay});
-    modal.present();
-    modal.onDidDismiss(data => {
-        if (data) {
-          console.log("onDidDismiss   ", data);
-          let eventData = data;
-
-          eventData.startTime = new Date(data.startTime); // string to Date
-          eventData.endTime = new Date(data.endTime);
-          console.log("eventSource avant push  ", this.eventSource);
-          let events= this.eventSource;
-          events.push(eventData);
-          //console.log("eventSource aprés push  ", this.eventSource);
-
-          this.eventSource = [];
-          setTimeout(() => {
-            this.eventSource = events;
-          });
-        }
-      });
-*/
-    }
+  }
 
 // format the tasks'deadlines to be accepted by the calendar
 // see https://github.com/twinssbc/Ionic2-Calendar#eventsource
@@ -132,11 +162,10 @@ formatTasksDeadlinesToUtc(){
 
     onEventSelected(event) {
 
-      let start = moment(event.startTime).format('LL'); 
+      let start = moment(event.startTime).format('LL');
 
       let alert = this.alertCtrl.create({
         title: '' + event.title,
-        //subTitle: 'From: ' + start + '<br>To: ' + end,
         subTitle:"Deadline:<br>" + start,
         buttons: ['OK']
       })

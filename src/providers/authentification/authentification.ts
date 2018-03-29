@@ -6,7 +6,7 @@ import 'rxjs/add/operator/do';
 export class AuthentificationProvider {
 
   private url = 'http://127.0.0.1:8000/get_auth_token/';
-  private credentials={username:"cedric",password:"azertyuiop"}; //TODO donner la possibilité de les changer
+  private credentials={username:"cedric",password:"azertyuiop"};
   private token=null;
   public tokenReceived=false;
 

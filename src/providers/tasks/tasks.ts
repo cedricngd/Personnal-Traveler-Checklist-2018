@@ -50,7 +50,7 @@ export class TasksProvider {
     }
     return task;
   }
-/*
+
   // get info about a specific task
   getTaskInfo(task:any){
     let alert = this.alertCtrl.create({
@@ -59,6 +59,6 @@ export class TasksProvider {
      buttons: ['OK']
     });
     return alert;
-  }*/
+  }
 
 }
