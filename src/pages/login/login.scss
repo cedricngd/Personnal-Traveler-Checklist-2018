@@ -5,7 +5,7 @@ page-login {
   .bg .scroll-content{
     height: 100%;
     width: 100%;
-    background: linear-gradient(140deg,#f4f4f4 30%, #488aff 60%);
+    background: linear-gradient(140deg,#f4f4f4 30%, #4169E1 60%);
     overflow: hidden; //hide scroll bar
 
 
@@ -13,12 +13,12 @@ page-login {
   .head{
     position: absolute;
     display: block;
-    color: #0000ff;
-    top: 20%;
+    color: #000080;
+    top: 30%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 100%;
-    //font-family:Pacifico;
+    font-family:Pacifico;
 
     padding-top: 2px;
     font-weight: 200;
@@ -27,7 +27,7 @@ page-login {
   .inputs{
     position: absolute;
     display:block;
-    top:50%;
+    top:60%;
     left:50%;
     transform: translate(-50%,-50%);
     width:80%;
@@ -59,6 +59,11 @@ page-login {
         border: 1px solid #fff;
         box-shadow: 0px;
         color: #000!important;
+    }
+
+    .img{
+      position: absolute;
+      top:5%;
     }
 
 }

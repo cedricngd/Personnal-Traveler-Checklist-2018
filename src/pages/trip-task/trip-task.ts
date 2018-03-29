@@ -117,7 +117,7 @@ export class TripTaskPage {
     }
 
     //add a new task for this trip
-    public addTask(){
+    addTask(){
       let modal= this.addCustomTaskModal.create('AddCustomTaskPage',{id:this.id});
       modal.onDidDismiss(() => {
         this.updateTasks(this.id);

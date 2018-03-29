@@ -2,21 +2,26 @@
 display all the user's tasks
 -->
 <ion-header>
-
   <ion-navbar color="primary">
-    <ion-title>My tasks</ion-title>
+    <ion-title>
+      {{ viewTitle }}
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="addEvent()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
-
 </ion-header>
 
-
-<ion-content padding>
-  <h5  ion-text color="orange"> Tasks to be done :</h5>
-
-  <ion-list no-lines>
-    <button ion-item *ngFor="let task of toDoTasks" (click)="showTaskInfo(task)" >
-      {{ task.title }}
-    </button>
-  </ion-list>
-
+<ion-content>
+<calendar [eventSource]="eventSource"
+        [calendarMode]="calendar.mode"
+        [currentDate]="calendar.currentDate"
+        (onEventSelected)="onEventSelected($event)"
+        (onTitleChanged)="onViewTitleChanged($event)"
+        (onTimeSelected)="onTimeSelected($event)"
+        step="30"
+        class="calendar">
+      </calendar>
 </ion-content>

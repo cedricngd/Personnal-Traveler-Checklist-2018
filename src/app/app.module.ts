@@ -12,8 +12,7 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { TripTaskPage } from '../pages/trip-task/trip-task';
 import { LoginPage } from '../pages/login/login';
 
-//import { AddCustomTaskPage } from '../pages/add-custom-task/add-custom-task';
-
+import { NgCalendarModule  } from 'ionic2-calendar';
 
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -33,11 +32,11 @@ import { ProfileProvider } from '../providers/profile/profile';
     TabsPage,
     TripTaskPage,
     LoginPage,
-  //  AddCustomTaskPage,
 
 
   ],
   imports: [
+    NgCalendarModule,
     BrowserModule,
     HttpClientModule,
     IonicModule.forRoot(MyApp),

@@ -27,7 +27,6 @@ export class TripsPage {
   updateTrips(){
     this.tripsProvider.getRemoteTrips().subscribe(data=>{
           this.trips=data;
-          console.log(this.trips)
         });
 
   }
@@ -67,7 +66,7 @@ export class TripsPage {
       error => {
         console.log("Removing trip failed: ",error);
       }
-    ); 
+    );
   }
 
   refreshTrips(refresher) {

@@ -39,7 +39,6 @@ export class TasksProvider {
 
   // format JSON to create a new task
   public jsonFormat(title:any,comments:any,tripId:any){
-
     let task={
       "trip": tripId,
       "title":	title,
