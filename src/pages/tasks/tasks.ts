@@ -32,6 +32,7 @@ export class TasksPage {
   // runs when the page become active and get the updated todoTasks
   ionViewWillEnter (){
     this.getToDoTasks();
+
   }
 
   // runs when the page has become inactive and clear the todoTasks
@@ -45,30 +46,39 @@ export class TasksPage {
     this.tasksProvider.getAllRemoteTasks().subscribe(data=>{
           let tasks:any=data;
           for(let i =0;i<tasks.length;i++){
-            if(tasks[i].completed==false && tasks[i].isVisible==true){
+            if(tasks[i].completed==false ){
               this.toDoTasks.push(tasks[i]);
             }
-
           }
-          console.log("on recoit ces taches: ",this.toDoTasks)
-
+          this.addTasksToCalendar();
         });
 
   }
 
-  showTaskInfo(task:any){
-    if(task.comments != "" && task.comments != null){
-        this.tasksProvider.getTaskInfo(task).present();
-    }
+
+  //Calendar callbacks
+
+
+  addEvent(){
   }
 
 
 
-  //Calendar callbacks
+  // adds tasks to calendar
+  addTasksToCalendar() {
+    this.formatTasksDeadlinesToUtc();
+    let events= this.eventSource; // all the previous entered tasks
+    for(let i =0;i<this.toDoTasks.length;i++){
+      events.push(this.toDoTasks[i]);
+    }
+      console.log(events)
+    this.eventSource = [];
+    setTimeout(() => {
+      this.eventSource = events;
+    });
 
-  // callback when add button is pressed: add an event
-  addEvent() {
 
+/*
 
     let modal = this.modalCtrl.create('EventModalPage', {selectedDay: this.selectedDay});
     modal.present();
@@ -77,19 +87,43 @@ export class TasksPage {
           console.log("onDidDismiss   ", data);
           let eventData = data;
 
-          eventData.startTime = new Date(data.startTime);
+          eventData.startTime = new Date(data.startTime); // string to Date
           eventData.endTime = new Date(data.endTime);
-
-          let events = this.eventSource;
+          console.log("eventSource avant push  ", this.eventSource);
+          let events= this.eventSource;
           events.push(eventData);
+          //console.log("eventSource aprés push  ", this.eventSource);
+
           this.eventSource = [];
           setTimeout(() => {
             this.eventSource = events;
           });
         }
       });
-
+*/
     }
+
+// format the tasks'deadlines to be accepted by the calendar
+// see https://github.com/twinssbc/Ionic2-Calendar#eventsource
+formatTasksDeadlinesToUtc(){
+
+  for(let i =0;i<this.toDoTasks.length;i++){
+    let year  = new Date(this.toDoTasks[i].deadline).getFullYear();
+    let month = new Date(this.toDoTasks[i].deadline).getMonth();
+    let day   = new Date(this.toDoTasks[i].deadline).getDate();
+
+    let taskData={                                        // data to be fed to the calendar
+      allDay:true,                                      // tasks only last one day
+      endTime:  new Date (Date.UTC( year, month,day+1)),
+      startTime:new Date (Date.UTC( year,month, day)),
+      title: this.toDoTasks[i].title
+    }
+    this.toDoTasks[i]=taskData;
+  }
+
+}
+
+
 
 //callback to get the month and year of the curent calendar page
     onViewTitleChanged(title) {
@@ -97,18 +131,13 @@ export class TasksPage {
     }
 
     onEventSelected(event) {
-      console.log("onEventSelected",  this.selectedDay );
-      console.log("event.startTime",  event.startTime);
-      console.log("moment(event.startTime)",  moment(event.startTime));
-      console.log("moment(event.startTime).format('LLLL')",  moment(event.startTime).format('LLLL'));
 
-
-      let start = moment(event.startTime).format('LLLL'); // e.g. Thursday, March 22, 2018 12:00 PM
-      let end = moment(event.endTime).format('LLLL');
+      let start = moment(event.startTime).format('LL'); 
 
       let alert = this.alertCtrl.create({
         title: '' + event.title,
-        subTitle: 'From: ' + start + '<br>To: ' + end,
+        //subTitle: 'From: ' + start + '<br>To: ' + end,
+        subTitle:"Deadline:<br>" + start,
         buttons: ['OK']
       })
       alert.present();
@@ -119,12 +148,5 @@ export class TasksPage {
     onTimeSelected(ev) {
       this.selectedDay = ev.selectedTime;
     }
-
-
-
-
-
-
-
 
 }
