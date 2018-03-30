@@ -25,9 +25,6 @@ display all the user's tasks
         class="calendar">
       </calendar>
 
-
-
-
       <ng-template #template let-view="view" let-row="row" let-col="col">
         <div  *ngFor="let obj of view.dates[row*7+col].events"  >
           <p [ngStyle]="{'background-color': obj.eventColor}">{{obj.message}}</p>
