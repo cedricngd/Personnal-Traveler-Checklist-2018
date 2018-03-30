@@ -42,7 +42,6 @@ export class TasksPage {
     // but HTTP functions are asynchronous ones
     // so we use forkJoin method
     Observable.forkJoin([tripsObservable,tasksObservable]).subscribe (data =>{
-      console.log("resultat get!", data)
       let tasks:any=data[0];
       for(let i =0;i<tasks.length;i++){
         if(tasks[i].completed==false && tasks[i].deadline != null){
@@ -82,7 +81,6 @@ export class TasksPage {
       for(let i =0;i<this.trips.length;i++){
         events.push(this.trips[i]);
       }
-      console.log("this.eventSource",this.eventSource)
       this.eventSource = [];
       setTimeout(() => {
         this.eventSource = events;
@@ -101,7 +99,6 @@ export class TasksPage {
       }
       this.trips[i]=tripData;
     }
-    console.log("voyage formate",this.trips)
   }
 
 
@@ -117,7 +114,6 @@ formatTasksDeadlinesToUtc(){
     }
     this.toDoTasks[i]=taskData;
   }
-  console.log("tasks formate",this.toDoTasks)
 }
 
 

@@ -14,12 +14,27 @@
 
     <h5 padding-top padding-left >Enter the title of the task:</h5>
     <ion-item >
-      <ion-input type="text" clearInput= true [(ngModel)]="title" value="title"></ion-input>
+      <ion-input type="text" clearInput= true placeholder="title" [(ngModel)]="title" ></ion-input>
     </ion-item>
 
     <h5 padding-top padding-left >Enter a short description (optional):</h5>
     <ion-item>
-      <ion-input  type="text" clearInput= true [(ngModel)]="comments"></ion-input>
+      <ion-input  type="text" placeholder="description" clearInput= true [(ngModel)]="comments"></ion-input>
+    </ion-item>
+
+    <h5 padding-top padding-left >Enter the deadline of the task:</h5>
+    <ion-item >
+      <ion-datetime displayFormat="YYYY-MMM-DD" min="2018-04-01" max="2050-10-31" placeholder="YYYY-MMM-DD"[(ngModel)]="deadline"></ion-datetime>
+    </ion-item>
+
+
+    <ion-item class="category">
+      <ion-label>Choose a category</ion-label>
+      <ion-select [(ngModel)]="category">
+        <ion-option value="Health">Health</ion-option>
+        <ion-option value="Paperwork">Paperwork</ion-option>
+        <ion-option value="Other">Other</ion-option>
+      </ion-select>
     </ion-item>
 
 </ion-content>

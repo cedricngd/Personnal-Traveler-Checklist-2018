@@ -15,6 +15,8 @@ export class AddCustomTaskPage {
   public title:any;
   public comments:any;
   public tripId:any;
+  public deadline:string;
+  public category:string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
   private view:ViewController, public tasksProvider:TasksProvider) {
@@ -27,8 +29,12 @@ export class AddCustomTaskPage {
 
   // create a new task
   createTask(){
-    this.tasksProvider.addTasks(this.title, this.comments, this.tripId).subscribe(data=>{
+
+    this.tasksProvider.addTasks(this.title, this.comments, this.tripId, this.deadline, this.category).subscribe(data=>{
+      this.tasksProvider.getRemoteTasksById(this.tripId).subscribe((allTasks:any[])=>{
+        console.log("allTasks",allTasks)
         this.close();
+        });
       });
   }
 

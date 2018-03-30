@@ -33,21 +33,24 @@ export class TasksProvider {
 
   }
 
-  public addTasks(title:any,comments:any,tripId:any){
-    return this.http.post('http://127.0.0.1:8000/tasks/',this.jsonFormat(title,comments,tripId),{headers:this.authProvider.createHeader()});
+  public addTasks(title:any,comments:any,tripId:any,deadline:string, category:string){
+
+    return this.http.post('http://127.0.0.1:8000/tasks/',this.jsonFormat(title,comments,tripId,deadline,category),{headers:this.authProvider.createHeader()});
   }
 
   // format JSON to create a new task
-  public jsonFormat(title:any,comments:any,tripId:any){
+  public jsonFormat(title:any,comments:any,tripId:any,deadline:string, category:string){
     let task={
       "trip": tripId,
       "title":	title,
-      "deadline":	null,
+      "deadline":	deadline,
       "completed":	false,
       "comments": comments,
       "auto":	false,
-      "isVisible":	true,
+      "category":category
     }
+    console.log("on ajoute la task ",task)
+
     return task;
   }
 
