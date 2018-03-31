@@ -19,15 +19,9 @@ export class TripsProvider {
 
   //send the trip to the server
   public setRemoteTrip(form:any){
-    this.data =  this.JSONFormat(form);
-    console.log ("le trip envoyé: ",this.data);
-    this.http.post(this.baseUrl+this.tripUrl,this.data,{headers:this.authProvider.createHeader()})
-    .subscribe(data => {
-      this.data.response = data["_body"]; //https://stackoverflow.com/questions/39574305/property-body-does-not-exist-on-type-response
-    }, error => {
-    console.log("Trips post request failed: ",error);
-    })
+      return this.http.post(this.baseUrl+this.tripUrl,form,{headers:this.authProvider.createHeader()});
   }
+
 
   public deleteRemoteTrip(trip:any){
     let ret=this.http.delete(this.baseUrl+"trips/"+trip.id+"/",{headers:this.authProvider.createHeader()})
@@ -37,7 +31,7 @@ export class TripsProvider {
 
 
   // Format the data to be accepted by the server
-  private JSONFormat(form:any){
+  public JSONFormat(form:any){
     let departureTime = form.departureDate+"T"+form.departureTime+"Z";
     let arrivalTime =  form.arrivalDate+"T"+form.arrivalTime+"Z";
     return {

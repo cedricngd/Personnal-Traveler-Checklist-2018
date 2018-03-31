@@ -27,11 +27,9 @@ export class ProfilePage {
       this.residence_country=profile.residence_country.name;
 
       let countries:any[]=profile.visited_countries
-      console.log(countries)
       this.visited_countries=[];
       for(let i=0;i<countries.length;i++)
         this.visited_countries.push(countries[i].name);
-      console.log(this.visited_countries)
 
     });
   }

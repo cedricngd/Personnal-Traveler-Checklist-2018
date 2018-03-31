@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage,NavParams, NavController, ToastController, ViewController
-  ,AlertController } from 'ionic-angular';
+import { IonicPage,NavParams, NavController, ViewController
+  ,AlertController,LoadingController } from 'ionic-angular';
 import { TripsProvider } from '../../providers/trips/trips';
+
 
 @IonicPage()
 @Component({
@@ -22,7 +23,8 @@ export class NewTripPage {
   public countries: any[];
 
   constructor(public navCtrl: NavController, private view:ViewController, params: NavParams,
-  public tripsProvider:TripsProvider,public toastCtrl:ToastController, public alertCtrl: AlertController) {
+  public tripsProvider:TripsProvider, public alertCtrl: AlertController,
+public loadingCtrl: LoadingController) {
     this.countries=[];
     this.tripsProvider.getCountries().subscribe(data=>{
       var countriesList:any;
@@ -35,7 +37,7 @@ export class NewTripPage {
   }
 
   // Validation of a new trip
-  validateTrip(){  //TODO possibilité d'aller retour
+  validateTrip(){
     this.form.arrivalCountry=this.arrivalCountry;
     this.form.arrivalDate=this.arrivalDate;
     this.form.arrivalTime=this.arrivalTime;
@@ -43,28 +45,44 @@ export class NewTripPage {
     this.form.departureDate=this.departureDate;
     this.form.departureTime=this.departureTime;
 
-    if (this.form.departureCountry==null||this.form.departureTime==null //TODO rendre plus "joli"
+    if (this.form.departureCountry==null||this.form.departureTime==null
       ||this.form.departureDate==null||this.form.arrivalCountry==null
       ||this.form.arrivalTime==null||  this.form.arrivalDate==null){
         this.showAlert();
     }
     else{
-      this.tripsProvider.setRemoteTrip(this.form);
-      this.presentToast();//TODO executer si pas d'erreur d"envoi
+      let data:any;
+      data =  this.tripsProvider.JSONFormat(this.form);
+      let loading=this.presentLoading();
+      this.tripsProvider.setRemoteTrip(data).subscribe(data => {
+        loading.dismiss();
+      }, error => {
+      console.log("Trips post request failed: ",error);
+      });
       this.close();
     }
   }
 
-
-
-  // message: Validation OK
-  presentToast() { //TODO executer si pas d'erreur d'envoi
-    let toast = this.toastCtrl.create({
-      message: 'This trip was successfully added ! ',
-      duration: 3000
+  // loading while the trip is saved on the server
+  presentLoading() {
+    let loading = this.loadingCtrl.create({
+      content: 'Adding trip to server...'
     });
-    toast.present();
+    let IsStillActive:boolean=true;
+    loading.onDidDismiss(() => {
+      IsStillActive=false;
+    });
+    loading.present();
+
+    setTimeout(() => {
+      if (IsStillActive){
+          loading.dismiss();
+          console.error("Cannot contact server, check network connexion");
+      }
+    }, 10000);
+    return loading;
   }
+
 
   // alert: all fields must be filled
   showAlert() {
