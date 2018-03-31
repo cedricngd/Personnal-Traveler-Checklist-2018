@@ -1,2 +1,15 @@
 page-profile {
+  .scrollDisable .scroll-content{
+    overflow: hidden; //hide scroll bar
+  }
+
+  .vcountries{
+    position:absolute;
+    bottom:15%;
+  }
+  .name{
+    position:absolute;
+    left:50%;
+    top:6%;
+  }
 }

@@ -7,7 +7,6 @@ import { AuthentificationProvider } from '../../providers/authentification/authe
 export class ProfileProvider {
 
   constructor(public http: HttpClient,public authProvider: AuthentificationProvider) {
-    console.log('Hello ProfileProvider Provider');
   }
 
 

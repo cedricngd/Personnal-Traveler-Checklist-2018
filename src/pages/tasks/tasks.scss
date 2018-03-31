@@ -1,3 +1,5 @@
 page-tasks {
-
+  .scrollDisable .scroll-content{
+    overflow: hidden; //hide scroll bar
+  }
 }

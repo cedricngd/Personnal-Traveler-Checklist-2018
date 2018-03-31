@@ -59,9 +59,6 @@ export class TripTaskPage {
       this.tasksProvider.getRemoteTasksById(id).subscribe((allTasks:any[])=>{
         this.sortTask(allTasks);
       });
-      console.log("tasksDone",this.toDoTasksHealth)
-      console.log("toDoTasks: ",this.tasksDoneHealth)
-
     }
 
     // sort tasks in 3 categories: Health related and Paperwork related and other kinds
@@ -88,7 +85,7 @@ export class TripTaskPage {
           this.toDoTasksMisc.push(allTasks[i]);
         }
         else{
-          console.error("error in trip-task.ts l65");
+          console.error("error in trip-task.ts in sortTask()");
         }
       }
     }

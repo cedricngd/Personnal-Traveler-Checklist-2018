@@ -8,20 +8,25 @@
 </ion-header>
 
 
-<ion-content padding>
-    <!--<img src="./../../../www/assets/imgs/userDefaultPic"> -->
+<ion-content padding class="scrollDisable">
+    <ion-row padding-bottom>
+      <ion-img style="background: transparent" width="80" height="80"  src="assets/imgs/userDefaultPic.png"></ion-img>
+      <h3 class="name" style="color:#FFA500;">Daniel Durant</h3>
+    </ion-row>
+    <h5 >
+      <u  style="color:#4169E1" >Address:</u><br/> {{address}}<br/>
+      <u style="color:#4169E1;">Birth date:</u> {{birth_date}}<br/>
+      <u style="color:#4169E1;">Nationnality:</u> {{nationalities}}<br/>
+      <u style="color:#4169E1;">Phone:</u> {{phone}}<br/>
+      <u style="color:#4169E1;">Residence country:</u> {{residence_country}}
+    </h5>
 
-    <ion-img style="background: transparent" width="80" height="80"  src="assets/imgs/userDefaultPic.png"></ion-img>
+    <div class="vcountries">
+      <h5 ><u style="color:#4169E1;">Visited countries:</u></h5>
+      <ion-item no-lines *ngFor="let visited_country  of visited_countries">
+        {{visited_country}}
+      </ion-item>
+    </div>
 
-<!--
-  <ion-list>
-    <button ion-item *ngFor="let item of profile" (click)="editProfile(item)">
-      {{ item }}
-    </button>
-   </ion-list>
--->
-<h3 ion-text color="primary">
-  Here will be showed some user information
-</h3>
 
 </ion-content>
