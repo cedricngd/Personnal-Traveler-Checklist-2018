@@ -25,7 +25,6 @@ export class TripsProvider {
 
   public deleteRemoteTrip(trip:any){
     let ret=this.http.delete(this.baseUrl+"trips/"+trip.id+"/",{headers:this.authProvider.createHeader()})
-    console.log(ret);
     return ret;
   }
 
