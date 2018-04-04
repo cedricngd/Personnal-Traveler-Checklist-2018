@@ -1,8 +1,8 @@
 # Personnal Traveller Checklist
 
-This is a repo for a student project of Ionic app
+This is a repo for an Ionic app student project.
 
-**Members:** Cédric NGUYEN DUC
+**Members:** Cédric NGUYEN DUC Silvestre PERRET
 
 **Client:** Amadeus
 
@@ -15,9 +15,9 @@ These instructions will get you a copy of the project up and running on your loc
 ### Prerequisites
 
 * You'll have to install Ionic 3 and its dependencies. Installation steps [here](https://ionicframework.com/docs/intro/installation/).
-* This app is paired with a [Django Web serveur](https://github.com/Silverret/ptc_api_2018). Make sure you installed it and ran it before launching the app.
+* This app is paired with a [Django Web serveur](https://github.com/Silverret/ptc_api_2018). Make sure you installed it and run it before launching the app.
 
-### Installing
+### Installing the app
 
 1-  Create a new blank Ionic project. Make sure you used the right name:
 
@@ -59,11 +59,7 @@ ionic serve --lab
 ```
 
 
-
-
-## Ionic info:
-
-cli packages: (C:\Users\cedric\AppData\Roaming\npm\node_modules)
+## Ionic and system info:
 
     @ionic/cli-utils  : 1.19.2
     ionic (Ionic CLI) : 3.20.0
