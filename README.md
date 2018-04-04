@@ -1,9 +1,12 @@
 # Personnal Traveller Checklist
 
 This is a repo for a student project of Ionic app
+
 **Members:** Cédric NGUYEN DUC
+
 **Client:** Amadeus
-**Purpose:** help the user to prepare his trip with automated customed todo list
+
+**Purpose:** help the user to prepare his trip with an automated and customed todo list
 
 ## Getting Started
 
@@ -11,14 +14,15 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-* You'll have to install Ionic 3 and its dependencies. Installation setps [here](https://ionicframework.com/docs/intro/installation/).
+* You'll have to install Ionic 3 and its dependencies. Installation steps [here](https://ionicframework.com/docs/intro/installation/).
 * This app is paired with a [Django Web serveur](https://github.com/Silverret/ptc_api_2018). Make sure you installed it and ran it before launching the app.
 
 ### Installing
+
 1-  Create a new blank Ionic project. Make sure you used the right name:
 
 ```bash
-ionic start PTC2018 blank
+ionic start Personnal-Traveler-Checklist-2018 blank
 ```
 Answer no to "Would you like to integrate your new app with Cordova to target native iOS and Android?"
 
